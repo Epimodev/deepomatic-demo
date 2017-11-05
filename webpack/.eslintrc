@@ -1,0 +1,10 @@
+{
+  "rules": {
+    "import/no-extraneous-dependencies": ["error", {}]
+  },
+  "env": {
+    "shelljs": true,
+    "browser": false,
+    "node": true
+  }
+}

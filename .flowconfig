@@ -1,0 +1,17 @@
+[ignore]
+
+[include]
+
+[libs]
+
+[lints]
+
+[options]
+module.file_ext=.js
+module.file_ext=.jsx
+module.file_ext=.json
+module.file_ext=.scss
+module.name_mapper='^src/\(.*\)$' -> '<PROJECT_ROOT>/src/\1'
+module.name_mapper.extension='svg' -> '<PROJECT_ROOT>/src/stubs/svgStub.js.flow'
+
+[strict]
