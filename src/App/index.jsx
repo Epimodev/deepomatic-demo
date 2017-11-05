@@ -1,10 +1,10 @@
 // @flow
 import React from 'react';
-import style from './style.scss';
+import './style.scss';
 
 function App() {
   return (
-    <div className={style.container}>
+    <div>
       Hello Deepomatic
     </div>
   );

@@ -1,3 +1,10 @@
-.container {
-  color: dodgerblue;
+@import "fonts";
+@import "colors";
+
+body {
+  margin: 0;
+  font-family: "montserrat";
+  font-weight: 300;
+  font-size: 16px;
+  color: $dark-purple;
 }
