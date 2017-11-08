@@ -6,14 +6,14 @@ type Props = {
   className?: string,
 }
 
-const Icon = (props: Props) => {
+function Icon(props: Props) {
   const { href, className } = props;
   return (
     <svg className={className}>
       <use xlinkHref={href} />
     </svg>
   );
-};
+}
 
 Icon.defaultProps = {
   className: '',
