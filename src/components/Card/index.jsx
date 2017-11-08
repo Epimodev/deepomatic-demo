@@ -1,6 +1,8 @@
 // @flow
 import * as React from 'react';
 import style from './style.scss';
+import CardTitle from './CardTitle';
+import CardText from './CardText';
 
 type Props = {
   children: React.Element<any>;
@@ -18,6 +20,5 @@ function Card(props: Props) {
   );
 }
 
-Card.defaultProps = {};
-
 export default Card;
+export { CardTitle, CardText };
