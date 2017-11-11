@@ -2,10 +2,13 @@
 @import "mixins";
 
 $borderRadius: 10px;
+$height: 35px;
+$borderWeight: 2px;
 
 .container {
   position: relative;
   display: inline-block;
+  height: $height;
 
   &::after {
     content: "";
@@ -31,19 +34,19 @@ $borderRadius: 10px;
   position: relative;
   z-index: 10;
   min-width: 150px;
-  height: 35px;
-  line-height: 31px;
+  height: $height;
+  line-height: $height - (2 * $borderWeight);
   padding: 0 20px;
   border-radius: $borderRadius;
   box-sizing: border-box;
-  border: 2px solid;
+  border: $borderWeight solid;
   background-color: white;
   color: $purple;
   font-weight: normal;
 }
 
 .button_primary {
-  line-height: 35px;
+  line-height: $height;
   border: none;
   background: $purple-gradian;
   color: white;

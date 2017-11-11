@@ -6,7 +6,7 @@ import CardText from './CardText';
 import CardButtons from './CardButtons';
 
 type Props = {
-  children: React.Element<any>;
+  children: React.Element<any> | React.ChildrenArray<React.Element<any>>;
 }
 
 function Card(props: Props) {

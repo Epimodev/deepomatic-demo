@@ -1,6 +1,10 @@
 .buttonList {
+  flex-grow: 1;
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
+  margin: 20px 0 10px 0;
+  min-height: 35px;
 }
 
 .buttonList_single {
