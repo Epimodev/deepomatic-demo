@@ -1,3 +1,7 @@
+@import "responsive";
+
+$transitionDuration: 400ms;
+
 .container {
   z-index: 10;
   position: absolute;
@@ -8,19 +12,52 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: $transitionDuration;
+}
+
+.containerEnter {
+  opacity: 0;
+  transform: translateX(50%);
+  @include phone {
+    transform: translateX(100%);
+  }
+}
+.containerEnterActive {
+  opacity: 1;
+  transform: translateX(0);
+}
+.containerExit {
+  opacity: 1;
+  transform: translateX(0);
+}
+.containerExitActive {
+  opacity: 0;
+  transform: translateX(50%);
+  @include phone {
+    transform: translateX(100%);
+  }
 }
 
 .card {
-  display: flex;
-  flex-direction: column;
   width: calc(100% - 20px);
   max-width: 400px;
   height: calc(100% - 20px);
   max-height: 400px;
-  padding: 10px;
   box-sizing: border-box;
   background-color: white;
   border-radius: 5px;
+  transform-origin: 0 50%;
+  transition: $transitionDuration;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
   box-shadow: 0px 4px 10px rgba(#374699, 0.3);
   overflow: auto;
+  transition: $transitionDuration;
 }

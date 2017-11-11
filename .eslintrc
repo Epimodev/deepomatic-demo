@@ -9,6 +9,11 @@
     "module": true,
     "environment": true
   },
+  "rules": {
+    "react/sort-comp": 0,
+    "react/default-props-match-prop-types": 0,
+    "import/prefer-default-export": 0
+  },
   "settings": {
     "import/resolver": {
       "webpack": {

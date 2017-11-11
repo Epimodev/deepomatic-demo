@@ -3,4 +3,9 @@
 declare module.exports: {|
   +'card': string;
   +'container': string;
+  +'containerEnter': string;
+  +'containerEnterActive': string;
+  +'containerExit': string;
+  +'containerExitActive': string;
+  +'content': string;
 |};

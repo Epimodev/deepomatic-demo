@@ -1,5 +1,6 @@
 @import "colors";
 @import "mixins";
+@import "responsive";
 
 $borderRadius: 10px;
 $height: 35px;
@@ -9,6 +10,7 @@ $borderWeight: 2px;
   position: relative;
   display: inline-block;
   height: $height;
+  min-width: 130px;
 
   &::after {
     content: "";
@@ -33,7 +35,7 @@ $borderWeight: 2px;
   @include resetButton;
   position: relative;
   z-index: 10;
-  min-width: 150px;
+  width: 100%;
   height: $height;
   line-height: $height - (2 * $borderWeight);
   padding: 0 20px;
@@ -43,6 +45,9 @@ $borderWeight: 2px;
   background-color: white;
   color: $purple;
   font-weight: normal;
+  @include phone {
+    padding: 0 10px;
+  }
 }
 
 .button_primary {
