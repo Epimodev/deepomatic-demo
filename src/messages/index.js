@@ -1,0 +1,25 @@
+// @flow
+export default {
+  WELCOME: 'Bienvenue',
+  WELCOME_FIRST_SENTENCE: 'Cette page va te permettre de tester la reconnaissance d’image de Deepomatic.',
+  WELCOME_SECOND_SENTENCE: 'Tu vas pouvoir détecter des objets présents dans une image d’internet ou venant de ton ordinateur',
+  TYPE_TO_DETECT: 'Type d’objet à détecter',
+  WHAT_TYPE_DETECT: 'Quel type d’objet souhaite-tu détecter ?',
+  FASHION: 'Mode',
+  FURNITURE: 'Mobilier',
+  WEAPONS: 'Armes',
+  IMAGE_TO_DETECT: 'Image à analyser',
+  ON_WEB: 'Sur internet',
+  ON_COMPUTER: 'Sur mon ordi',
+  CLICK_OR_DROP_FILE: 'Clic ou dépose un fichier ici',
+  FILE_ERROR: 'Seulement les fichier jpg et png sont pris en charge',
+  FILE_SUCCESS: 'L’image a bien été chargée !',
+  DETECTION_RESULTS: 'Résultat de la détection',
+  DETECTED_ITEMS: 'Éléments détectés :',
+  CHANGE_CONFIGURATION: 'Modifier la configuration',
+
+  START: 'Commencer',
+  PREVIOUS: 'Précédent',
+  NEXT: 'Suivant',
+  LAUNCH_DETECTION: 'Lancer l’analyse',
+};

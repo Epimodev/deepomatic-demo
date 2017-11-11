@@ -2,6 +2,7 @@
 import * as React from 'react';
 import Card, { CardTitle, CardText, CardButtons } from 'src/components/Card';
 import Button from 'src/components/Button';
+import messages from 'src/messages';
 
 type Props = {
   depth: number;
@@ -17,12 +18,12 @@ function SelectTypeCard(props: Props) {
 
   return (
     <Card depth={depth} show={show}>
-      <CardTitle>Select Type</CardTitle>
-      <CardText>What type ?</CardText>
+      <CardTitle>{messages.TYPE_TO_DETECT}</CardTitle>
+      <CardText>{messages.WHAT_TYPE_DETECT}</CardText>
 
       <CardButtons>
-        <Button onClick={onPrev}>Previous</Button>
-        <Button onClick={onNext} isPrimary>Next</Button>
+        <Button onClick={onPrev}>{messages.PREVIOUS}</Button>
+        <Button onClick={onNext} isPrimary>{messages.NEXT}</Button>
       </CardButtons>
     </Card>
   );
