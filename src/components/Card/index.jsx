@@ -3,6 +3,7 @@ import * as React from 'react';
 import style from './style.scss';
 import CardTitle from './CardTitle';
 import CardText from './CardText';
+import CardButtons from './CardButtons';
 
 type Props = {
   children: React.Element<any>;
@@ -21,4 +22,4 @@ function Card(props: Props) {
 }
 
 export default Card;
-export { CardTitle, CardText };
+export { CardTitle, CardText, CardButtons };
