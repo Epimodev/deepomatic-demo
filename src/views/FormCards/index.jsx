@@ -10,17 +10,20 @@ type Props = {}
 type State = {
   currentStep: number;
   detectionType: string;
+  uploadType: 'url' | 'file' | '';
 }
 
 class FormCards extends React.PureComponent<Props, State> {
   static defaultProps = {}
   onChangeTypeBind: (name: string, value: boolean) => void
+  onChangeUploadTypeBind: (value: 'left' | 'right') => void
   nextStepBind: () => void
   previousStepBind: () => void
   submitBind: () => void
   state = {
     currentStep: 0,
     detectionType: '',
+    uploadType: '',
   }
 
   constructor(props: Props) {
@@ -28,6 +31,7 @@ class FormCards extends React.PureComponent<Props, State> {
 
     this.nextStepBind = this.nextStep.bind(this);
     this.onChangeTypeBind = this.onChangeType.bind(this);
+    this.onChangeUploadTypeBind = this.onChangeUploadType.bind(this);
     this.previousStepBind = this.previousStep.bind(this);
     this.submitBind = this.submit.bind(this);
   }
@@ -37,6 +41,12 @@ class FormCards extends React.PureComponent<Props, State> {
       ? name
       : '';
     this.setState(() => ({ detectionType }));
+  }
+
+  onChangeUploadType(value: 'left' | 'right') {
+    const isUrl = value === 'left';
+    const uploadType = isUrl ? 'url' : 'file';
+    this.setState(() => ({ uploadType }));
   }
 
   nextStep() {
@@ -52,7 +62,7 @@ class FormCards extends React.PureComponent<Props, State> {
   }
 
   render() {
-    const { currentStep, detectionType } = this.state;
+    const { currentStep, detectionType, uploadType } = this.state;
 
     return (
       <div>
@@ -68,6 +78,8 @@ class FormCards extends React.PureComponent<Props, State> {
         <SelectFileCard
           depth={currentStep - 2}
           show={currentStep > 1}
+          uploadType={uploadType}
+          onChangeUploadType={this.onChangeUploadTypeBind}
           onNext={this.submitBind}
           onPrev={this.previousStepBind}
         />

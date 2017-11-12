@@ -1,0 +1,71 @@
+@import "colors";
+@import "mixins";
+
+$transitionDuration: 300ms;
+
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 35px;
+  margin-top: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+
+  &::before, &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  &::before {
+    border-radius: 10px;
+    border: 2px solid $green;
+  }
+  &::after {
+    width: 2px;
+    margin: auto;
+    background-color: $green;
+  }
+}
+
+.button {
+  @include resetButton;
+  position: relative;
+  z-index: 10;
+  width: 50%;
+  height: 100%;
+  line-height: 35px;
+  color: $green;
+  font-weight: normal;
+  transition: $transitionDuration;
+
+  &::before, &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    content: attr(aria-label);
+    transition: $transitionDuration;
+  }
+  &::after {
+    color: white;
+    transform: translateY(50%);
+    opacity: 0;
+  }
+}
+
+.button_selected {
+  background-color: $green;
+  &::before {
+    transform: translateY(-50%);
+    opacity: 0;
+  }
+  &::after {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
