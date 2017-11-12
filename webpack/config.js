@@ -4,8 +4,8 @@ module.exports = {
   assetsDir: 'assets',
   outputDir: 'dist',
   outputHTML: 'index.html',
-  outputJS: 'app.js',
-  outputCSS: 'style.css',
+  outputJS: 'app_[hash:5].js',
+  outputCSS: 'style_[contenthash:5].css',
   sassOptions: {
     includePaths: ['src/styleUtils'],
   },
