@@ -3,6 +3,7 @@ import * as React from 'react';
 import Card, { CardTitle, CardButtons } from 'src/components/Card';
 import Button from 'src/components/Button';
 import BinarySelect from 'src/components/BinarySelect';
+import InputText from 'src/components/InputText';
 import messages from 'src/messages';
 
 type Props = {
@@ -10,6 +11,8 @@ type Props = {
   show: boolean;
   uploadType: 'url' | 'file' | '';
   onChangeUploadType: (value: 'left' | 'right') => void;
+  imageUrl: string;
+  onChangeImageUrl: (value: string) => void;
   onPrev: () => void;
   onNext: () => void;
 }
@@ -22,7 +25,14 @@ function getSelectValue(uploadType: 'url' | 'file' | '') {
 
 function SelectFileCard(props: Props) {
   const {
-    depth, show, uploadType, onChangeUploadType, onPrev, onNext,
+    depth,
+    show,
+    uploadType,
+    onChangeUploadType,
+    imageUrl,
+    onChangeImageUrl,
+    onPrev,
+    onNext,
   } = props;
 
   const selectValue = getSelectValue(uploadType);
@@ -36,6 +46,14 @@ function SelectFileCard(props: Props) {
         leftLabel={messages.ON_WEB}
         rightLabel={messages.ON_COMPUTER}
         onChange={onChangeUploadType}
+      />
+
+      <InputText
+        value={imageUrl}
+        label={messages.IMAGE_URL}
+        placeholder={messages.IMAGE_URL_PLACEHOLDER}
+        error="Error message"
+        onChange={onChangeImageUrl}
       />
 
       <CardButtons>

@@ -11,6 +11,8 @@ export default {
   IMAGE_TO_DETECT: 'Image à analyser',
   ON_WEB: 'Sur internet',
   ON_COMPUTER: 'Sur mon ordi',
+  IMAGE_URL: 'URL de l’image',
+  IMAGE_URL_PLACEHOLDER: 'http://www.image.com',
   CLICK_OR_DROP_FILE: 'Clic ou dépose un fichier ici',
   FILE_ERROR: 'Seulement les fichier jpg et png sont pris en charge',
   FILE_SUCCESS: 'L’image a bien été chargée !',

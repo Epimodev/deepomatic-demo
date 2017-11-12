@@ -1,0 +1,97 @@
+@import "colors";
+@import "mixins";
+
+$errorHeight: 25px;
+
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin-top: 20px;
+  padding-bottom: $errorHeight;
+}
+
+.label {
+  padding: 0 10px;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.input {
+  @include resetInput;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 35px;
+  padding: 0 10px;
+  box-sizing: border-box;
+  background-color: #FAFBFF;
+
+  &::placeholder {
+    color: rgba(#252F66, 0.4);
+  }
+  &:focus + .border::before{
+    transform: scaleX(1);
+  }
+}
+.input_valid + .border::before {
+  transform: scaleX(1);
+}
+.input_invalid + .border::after {
+  transform: scaleX(1);
+}
+
+.border {
+  position: absolute;
+  z-index: 11;
+  left: 0;
+  right: 0;
+  bottom: $errorHeight;
+  height: 1px;
+  margin: 0;
+  border: none;
+  background-color: $dark-purple;
+
+  &::before, &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    transform-origin: 0;
+    transform: scaleX(0);
+    transition: 300ms;
+  }
+  &::before {
+    background-color: $green;
+  }
+  &::after {
+    background-color: $red;
+  }
+}
+
+.error {
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  bottom: 0px;
+  height: $errorHeight;
+  line-height: $errorHeight;
+  padding: 0 10px;
+  font-size: 14px;
+  color: $red;
+  transition: 300ms;
+}
+.errorEnter {
+  transform: translateY(-100%);
+}
+.errorEnterActive {
+  transform: translateY(0);
+}
+.errorExit {
+  transform: translateY(0);
+}
+.errorExitActive {
+  transform: translateY(-100%);
+}

@@ -11,12 +11,14 @@ type State = {
   currentStep: number;
   detectionType: string;
   uploadType: 'url' | 'file' | '';
+  imageUrl: string;
 }
 
 class FormCards extends React.PureComponent<Props, State> {
   static defaultProps = {}
   onChangeTypeBind: (name: string, value: boolean) => void
   onChangeUploadTypeBind: (value: 'left' | 'right') => void
+  onChangeImageUrlBind: (value: string) => void
   nextStepBind: () => void
   previousStepBind: () => void
   submitBind: () => void
@@ -24,6 +26,7 @@ class FormCards extends React.PureComponent<Props, State> {
     currentStep: 0,
     detectionType: '',
     uploadType: '',
+    imageUrl: '',
   }
 
   constructor(props: Props) {
@@ -32,6 +35,7 @@ class FormCards extends React.PureComponent<Props, State> {
     this.nextStepBind = this.nextStep.bind(this);
     this.onChangeTypeBind = this.onChangeType.bind(this);
     this.onChangeUploadTypeBind = this.onChangeUploadType.bind(this);
+    this.onChangeImageUrlBind = this.onChangeImageUrl.bind(this);
     this.previousStepBind = this.previousStep.bind(this);
     this.submitBind = this.submit.bind(this);
   }
@@ -49,6 +53,10 @@ class FormCards extends React.PureComponent<Props, State> {
     this.setState(() => ({ uploadType }));
   }
 
+  onChangeImageUrl(value: string) {
+    this.setState(() => ({ imageUrl: value }));
+  }
+
   nextStep() {
     this.setState(state => ({ currentStep: state.currentStep + 1 }));
   }
@@ -62,7 +70,12 @@ class FormCards extends React.PureComponent<Props, State> {
   }
 
   render() {
-    const { currentStep, detectionType, uploadType } = this.state;
+    const {
+      currentStep,
+      detectionType,
+      uploadType,
+      imageUrl,
+    } = this.state;
 
     return (
       <div>
@@ -80,6 +93,8 @@ class FormCards extends React.PureComponent<Props, State> {
           show={currentStep > 1}
           uploadType={uploadType}
           onChangeUploadType={this.onChangeUploadTypeBind}
+          imageUrl={imageUrl}
+          onChangeImageUrl={this.onChangeImageUrlBind}
           onNext={this.submitBind}
           onPrev={this.previousStepBind}
         />
