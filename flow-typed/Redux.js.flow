@@ -1,0 +1,24 @@
+// @flow
+/* eslint-disable no-use-before-define */
+
+type Action = {
+  +type: string,
+  +payload: any,
+};
+
+type Dispatch = (action: Action | ThunkAction) => void;
+type GetState = () => State;
+type ThunkAction = (dispatch: Dispatch, getState: GetState) => void;
+
+type UploadType = 'url' | 'file';
+
+type ConfigurationState = {
+  +currentStep: number;
+  +detectionType: string;
+  +uploadType: UploadType | '';
+  +imageUrl: string;
+}
+
+type State = {
+  +configuration: ConfigurationState;
+};
