@@ -1,5 +1,10 @@
+@import "responsive";
+
 .types {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  @include phone {
+    justify-content: center;
+  }
 }

@@ -18,18 +18,15 @@ function Checkbox(props: Props) {
     name, checked, color, children, onChange,
   } = props;
 
-  const containerClass = classnames(style.container, style[color]);
-  const checkboxClass = classnames(style.checkbox, {
-    [style.checkbox_active]: checked,
+  const containerClass = classnames(style.container, style[color], {
+    [style.container_checked]: checked,
   });
   const onClick = () => onChange(name, !checked);
 
   return (
     <button className={containerClass} onClick={onClick}>
-      <div className={checkboxClass}>
-        <Icon href={checkmarkIcon} className={style.checkmark} />
-      </div>
-      <div className={style.label}>{children}</div>
+      <Icon href={checkmarkIcon} className={style.checkmark} />
+      <span className={style.label}>{children}</span>
     </button>
   );
 }
