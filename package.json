@@ -27,6 +27,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^0.28.7",
     "css-modules-flow-types-loader": "^1.1.0",
     "dotenv": "^4.0.0",

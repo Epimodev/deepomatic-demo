@@ -1,106 +1,90 @@
 // @flow
 import * as React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import type { State, AppDispatch } from 'src/store';
 import WelcomeCard from './WelcomeCard';
 import SelectTypeCard from './SelectTypeCard';
 import SelectFileCard from './SelectFileCard';
-// import style from './style.scss';
+import * as actions from './actions';
+import type { UploadType } from './types';
 
-type Props = {}
+type ComponentProps = {}
 
-type State = {
-  currentStep: number;
-  detectionType: string;
-  uploadType: 'url' | 'file' | '';
-  imageUrl: string;
+type StateProps = {
+  +currentStep: number;
+  +detectionType: string;
+  +uploadType: UploadType | '';
+  +imageUrl: string;
 }
 
-class FormCards extends React.PureComponent<Props, State> {
-  static defaultProps = {}
-  onChangeTypeBind: (name: string, value: boolean) => void
-  onChangeUploadTypeBind: (value: 'left' | 'right') => void
-  onChangeImageUrlBind: (value: string) => void
-  nextStepBind: () => void
-  previousStepBind: () => void
-  submitBind: () => void
-  state = {
-    currentStep: 0,
-    detectionType: '',
-    uploadType: '',
-    imageUrl: '',
-  }
+type DispatchProps = {
+  changeType: (name: string, becomeChecked: boolean) => void;
+  changeUploadType: (value: 'left' | 'right') => void;
+  changeImageUrl: (value: string) => void;
+  nextStep: () => void;
+  previousStep: () => void;
+  submit: () => void;
+}
 
-  constructor(props: Props) {
-    super(props);
+type Props = ComponentProps & StateProps & DispatchProps
 
-    this.nextStepBind = this.nextStep.bind(this);
-    this.onChangeTypeBind = this.onChangeType.bind(this);
-    this.onChangeUploadTypeBind = this.onChangeUploadType.bind(this);
-    this.onChangeImageUrlBind = this.onChangeImageUrl.bind(this);
-    this.previousStepBind = this.previousStep.bind(this);
-    this.submitBind = this.submit.bind(this);
-  }
+type ComponentState = {}
 
-  onChangeType(name: string, becomeChecked: boolean) {
-    const detectionType = becomeChecked
-      ? name
-      : '';
-    this.setState(() => ({ detectionType }));
-  }
-
-  onChangeUploadType(value: 'left' | 'right') {
-    const isUrl = value === 'left';
-    const uploadType = isUrl ? 'url' : 'file';
-    this.setState(() => ({ uploadType }));
-  }
-
-  onChangeImageUrl(value: string) {
-    this.setState(() => ({ imageUrl: value }));
-  }
-
-  nextStep() {
-    this.setState(state => ({ currentStep: state.currentStep + 1 }));
-  }
-
-  previousStep() {
-    this.setState(state => ({ currentStep: state.currentStep - 1 }));
-  }
-
-  submit() {
-    console.log('Submit data');
-  }
-
+class FormCards extends React.PureComponent<Props, ComponentState> {
   render() {
     const {
       currentStep,
       detectionType,
       uploadType,
       imageUrl,
-    } = this.state;
+      changeType,
+      changeUploadType,
+      changeImageUrl,
+      nextStep,
+      previousStep,
+      submit,
+    } = this.props;
 
     return (
       <div>
-        <WelcomeCard depth={currentStep} onStart={this.nextStepBind} />
+        <WelcomeCard depth={currentStep} onStart={nextStep} />
         <SelectTypeCard
           depth={currentStep - 1}
           show={currentStep > 0}
           selected={detectionType}
-          onChange={this.onChangeTypeBind}
-          onNext={this.nextStepBind}
-          onPrev={this.previousStepBind}
+          onChange={changeType}
+          onNext={nextStep}
+          onPrev={previousStep}
         />
         <SelectFileCard
           depth={currentStep - 2}
           show={currentStep > 1}
           uploadType={uploadType}
-          onChangeUploadType={this.onChangeUploadTypeBind}
+          onChangeUploadType={changeUploadType}
           imageUrl={imageUrl}
-          onChangeImageUrl={this.onChangeImageUrlBind}
-          onNext={this.submitBind}
-          onPrev={this.previousStepBind}
+          onChangeImageUrl={changeImageUrl}
+          onNext={submit}
+          onPrev={previousStep}
         />
       </div>
     );
   }
 }
 
-export default FormCards;
+function mapStateToProps(state: State): StateProps {
+  return state.configuration;
+}
+
+function mapDispatchToProps(dispatch: AppDispatch) {
+  return bindActionCreators({
+    changeType: actions.changeType,
+    changeUploadType: actions.changeUploadType,
+    changeImageUrl: actions.changeImageUrl,
+    nextStep: actions.nextStep,
+    previousStep: actions.previousStep,
+    submit: actions.submitConfiguration,
+  }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FormCards);

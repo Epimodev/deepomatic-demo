@@ -1,24 +1,47 @@
 // @flow
 /* eslint-disable no-use-before-define */
 
-type Action = {
-  +type: string,
-  +payload: any,
-};
+// type ChangeTypeAction = {
+//   type: 'CHANGE_DETECTION_TYPE';
+//   payload: string;
+// }
+// type ChangeUpladTypeAction = {
+//   type: 'CHANGE_UPLOAD_TYPE';
+//   payload: string;
+// }
+// type ChangeImageUrlAction = {
+//   type: 'CHANGE_IMAGE_URL';
+//   payload: string;
+// }
+// type PreviousStepAction = {
+//   type: 'PREVIOUS_STEP';
+// }
+// type NextStepAction = {
+//   type: 'NEXT_STEP';
+// }
 
-type Dispatch = (action: Action | ThunkAction) => void;
-type GetState = () => State;
-type ThunkAction = (dispatch: Dispatch, getState: GetState) => void;
+// type Action =
+//   | ChangeTypeAction
+//   | ChangeUpladTypeAction
+//   | ChangeImageUrlAction
+//   | PreviousStepAction
+//   | NextStepAction
 
-type UploadType = 'url' | 'file';
+// export type Reducer<S> = (state: S, action: Action) => S;
 
-type ConfigurationState = {
-  +currentStep: number;
-  +detectionType: string;
-  +uploadType: UploadType | '';
-  +imageUrl: string;
-}
+// type Dispatch = (action: Action | ThunkAction) => void;
+// type GetState = () => State;
+// type ThunkAction = (dispatch: Dispatch, getState: GetState) => void;
 
-type State = {
-  +configuration: ConfigurationState;
-};
+// type UploadType = 'url' | 'file';
+
+// type ConfigurationState = {
+//   +currentStep: number;
+//   +detectionType: string;
+//   +uploadType: UploadType | '';
+//   +imageUrl: string;
+// }
+
+// type State = {
+//   +configuration: ConfigurationState;
+// };
