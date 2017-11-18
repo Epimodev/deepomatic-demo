@@ -12,6 +12,8 @@ export default {
   ON_WEB: 'Venant du net',
   ON_COMPUTER: 'De mon ordi',
   IMAGE_URL: 'URL de l’image',
+  EMPTY_URL: 'L’URL de l’image est obligatoire',
+  INVALID_URL: 'L’URL est invalide',
   IMAGE_URL_PLACEHOLDER: 'http://www.image.com',
   CLICK_OR_DROP_FILE: 'Clic ou dépose un fichier ici',
   FILE_ERROR: 'Seulement les fichier jpg et png sont pris en charge',

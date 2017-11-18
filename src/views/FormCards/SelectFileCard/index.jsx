@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { CSSTransition } from 'react-transition-group';
+import isURL from 'validator/lib/isURL';
 import Card, { CardTitle, CardButtons } from 'src/components/Card';
 import Button from 'src/components/Button';
 import BinarySelect from 'src/components/BinarySelect';
@@ -42,15 +43,21 @@ function getSelectValue(uploadType: 'url' | 'file' | '') {
   return '';
 }
 
-function submitIsAvailable(uploadType: 'url' | 'file' | '', imageUrl: string, fileValue: string) {
+function submitIsAvailable(uploadType: 'url' | 'file' | '', imageUrlError: string, fileValue: string): boolean {
   switch (uploadType) {
     case 'url':
-      return !!imageUrl;
+      return !imageUrlError;
     case 'file':
       return !!fileValue;
     default:
       return false;
   }
+}
+
+function getUrlError(imageUrl: string): string {
+  if (!imageUrl) return messages.EMPTY_URL;
+  if (!isURL(imageUrl)) return messages.INVALID_URL;
+  return '';
 }
 
 function SelectFileCard(props: Props) {
@@ -69,7 +76,8 @@ function SelectFileCard(props: Props) {
   } = props;
 
   const selectValue = getSelectValue(uploadType);
-  const onNextClick = submitIsAvailable(uploadType, imageUrl, fileValue)
+  const urlError = getUrlError(imageUrl);
+  const onNextClick = submitIsAvailable(uploadType, urlError, fileValue)
     ? onNext
     : null;
 
@@ -97,7 +105,7 @@ function SelectFileCard(props: Props) {
               value={imageUrl}
               label={messages.IMAGE_URL}
               placeholder={messages.IMAGE_URL_PLACEHOLDER}
-              error="Error message"
+              error={urlError}
               onChange={onChangeImageUrl}
             />
           </div>
