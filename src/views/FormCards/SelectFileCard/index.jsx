@@ -4,6 +4,7 @@ import Card, { CardTitle, CardButtons } from 'src/components/Card';
 import Button from 'src/components/Button';
 import BinarySelect from 'src/components/BinarySelect';
 import InputText from 'src/components/InputText';
+import InputImage from 'src/components/InputImage';
 import messages from 'src/messages';
 
 type Props = {
@@ -13,6 +14,9 @@ type Props = {
   onChangeUploadType: (value: 'left' | 'right') => void;
   imageUrl: string;
   onChangeImageUrl: (value: string) => void;
+  onChangeFile: (file: File) => void;
+  fileValue: string;
+  fileError: string;
   onPrev: () => void;
   onNext: () => void;
 }
@@ -31,6 +35,9 @@ function SelectFileCard(props: Props) {
     onChangeUploadType,
     imageUrl,
     onChangeImageUrl,
+    onChangeFile,
+    fileValue,
+    fileError,
     onPrev,
     onNext,
   } = props;
@@ -49,13 +56,21 @@ function SelectFileCard(props: Props) {
         onChange={onChangeUploadType}
       />
 
-      <InputText
+      <InputImage
+        label={messages.CLICK_OR_DROP_FILE}
+        successLabel={messages.FILE_SUCCESS}
+        error={fileError}
+        value={fileValue}
+        onChange={onChangeFile}
+      />
+
+      {/* <InputText
         value={imageUrl}
         label={messages.IMAGE_URL}
         placeholder={messages.IMAGE_URL_PLACEHOLDER}
         error="Error message"
         onChange={onChangeImageUrl}
-      />
+      /> */}
 
       <CardButtons>
         <Button onClick={onPrev}>{messages.PREVIOUS}</Button>

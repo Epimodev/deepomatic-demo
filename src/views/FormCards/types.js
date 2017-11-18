@@ -6,6 +6,8 @@ export type ConfigurationState = {
   +detectionType: string;
   +uploadType: UploadType | '';
   +imageUrl: string;
+  +fileValue: string;
+  +fileError: string;
 }
 
 export type ChangeTypeAction = {
@@ -18,6 +20,14 @@ export type ChangeUpladTypeAction = {
 }
 export type ChangeImageUrlAction = {
   type: 'CHANGE_IMAGE_URL';
+  payload: string;
+}
+export type ChangeImageFileAction = {
+  type: 'CHANGE_IMAGE_FILE';
+  payload: string;
+}
+export type SetImageFileErrorAction = {
+  type: 'SET_IMAGE_FILE_ERROR';
   payload: string;
 }
 export type PreviousStepAction = {
@@ -34,6 +44,8 @@ export type Action =
   | ChangeTypeAction
   | ChangeUpladTypeAction
   | ChangeImageUrlAction
+  | ChangeImageFileAction
+  | SetImageFileErrorAction
   | PreviousStepAction
   | NextStepAction
   | SubmitAction

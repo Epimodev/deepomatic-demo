@@ -4,8 +4,10 @@ import * as types from './types';
 const initialState: types.ConfigurationState = {
   currentStep: 0,
   detectionType: '',
-  imageUrl: '',
   uploadType: '',
+  imageUrl: '',
+  fileValue: '',
+  fileError: '',
 };
 
 export default function reducer(
@@ -27,6 +29,18 @@ export default function reducer(
       return {
         ...state,
         imageUrl: action.payload,
+      };
+    case 'CHANGE_IMAGE_FILE':
+      return {
+        ...state,
+        fileValue: action.payload,
+        fileError: '',
+      };
+    case 'SET_IMAGE_FILE_ERROR':
+      return {
+        ...state,
+        fileValue: '',
+        fileError: action.payload,
       };
     case 'PREVIOUS_STEP':
       return {

@@ -16,12 +16,15 @@ type StateProps = {
   +detectionType: string;
   +uploadType: UploadType | '';
   +imageUrl: string;
+  +fileValue: string;
+  +fileError: string;
 }
 
 type DispatchProps = {
   changeType: (name: string, becomeChecked: boolean) => void;
   changeUploadType: (value: 'left' | 'right') => void;
   changeImageUrl: (value: string) => void;
+  changeFile: (file: File) => void;
   nextStep: () => void;
   previousStep: () => void;
   submit: () => void;
@@ -38,6 +41,9 @@ function FormCards(props: Props) {
     changeType,
     changeUploadType,
     changeImageUrl,
+    changeFile,
+    fileValue,
+    fileError,
     nextStep,
     previousStep,
     submit,
@@ -61,6 +67,9 @@ function FormCards(props: Props) {
         onChangeUploadType={changeUploadType}
         imageUrl={imageUrl}
         onChangeImageUrl={changeImageUrl}
+        onChangeFile={changeFile}
+        fileValue={fileValue}
+        fileError={fileError}
         onNext={submit}
         onPrev={previousStep}
       />
@@ -77,6 +86,7 @@ function mapDispatchToProps(dispatch: AppDispatch) {
     changeType: actions.changeType,
     changeUploadType: actions.changeUploadType,
     changeImageUrl: actions.changeImageUrl,
+    changeFile: actions.changeFile,
     nextStep: actions.nextStep,
     previousStep: actions.previousStep,
     submit: actions.submitConfiguration,

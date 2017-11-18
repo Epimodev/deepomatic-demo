@@ -1,5 +1,6 @@
 // @flow
 import type { ActionThunk } from 'src/store';
+import messages from 'src/messages';
 import * as types from './types';
 
 export function changeType(name: string, becomeChecked: boolean): types.ChangeTypeAction {
@@ -27,6 +28,36 @@ export function changeImageUrl(value: string): types.ChangeImageUrlAction {
   return {
     type: 'CHANGE_IMAGE_URL',
     payload: value,
+  };
+}
+
+export function changeFile(file: File): ActionThunk {
+  return (dispatch) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result64 = reader.result;
+      if (typeof result64 === 'string') {
+        if (result64.startsWith('data:image/jpeg;') || result64.startsWith('data:image/png;')) {
+          dispatch({
+            type: 'CHANGE_IMAGE_FILE',
+            payload: result64,
+          });
+        } else {
+          dispatch({
+            type: 'SET_IMAGE_FILE_ERROR',
+            payload: messages.FILE_ERROR,
+          });
+        }
+      }
+    };
+    reader.onerror = () => {
+      dispatch({
+        type: 'SET_IMAGE_FILE_ERROR',
+        payload: messages.FILE_ERROR,
+      });
+    };
+
+    reader.readAsDataURL(file);
   };
 }
 
