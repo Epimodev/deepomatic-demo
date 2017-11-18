@@ -4,4 +4,5 @@ declare module.exports: {|
   +'button': string;
   +'button_primary': string;
   +'container': string;
+  +'container_disabled': string;
 |};

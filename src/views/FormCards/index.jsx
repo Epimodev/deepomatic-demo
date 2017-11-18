@@ -29,47 +29,43 @@ type DispatchProps = {
 
 type Props = ComponentProps & StateProps & DispatchProps
 
-type ComponentState = {}
+function FormCards(props: Props) {
+  const {
+    currentStep,
+    detectionType,
+    uploadType,
+    imageUrl,
+    changeType,
+    changeUploadType,
+    changeImageUrl,
+    nextStep,
+    previousStep,
+    submit,
+  } = props;
 
-class FormCards extends React.PureComponent<Props, ComponentState> {
-  render() {
-    const {
-      currentStep,
-      detectionType,
-      uploadType,
-      imageUrl,
-      changeType,
-      changeUploadType,
-      changeImageUrl,
-      nextStep,
-      previousStep,
-      submit,
-    } = this.props;
-
-    return (
-      <div>
-        <WelcomeCard depth={currentStep} onStart={nextStep} />
-        <SelectTypeCard
-          depth={currentStep - 1}
-          show={currentStep > 0}
-          selected={detectionType}
-          onChange={changeType}
-          onNext={nextStep}
-          onPrev={previousStep}
-        />
-        <SelectFileCard
-          depth={currentStep - 2}
-          show={currentStep > 1}
-          uploadType={uploadType}
-          onChangeUploadType={changeUploadType}
-          imageUrl={imageUrl}
-          onChangeImageUrl={changeImageUrl}
-          onNext={submit}
-          onPrev={previousStep}
-        />
-      </div>
-    );
-  }
+  return (
+    <div>
+      <WelcomeCard depth={currentStep} onStart={nextStep} />
+      <SelectTypeCard
+        depth={currentStep - 1}
+        show={currentStep > 0}
+        selected={detectionType}
+        onChange={changeType}
+        onNext={nextStep}
+        onPrev={previousStep}
+      />
+      <SelectFileCard
+        depth={currentStep - 2}
+        show={currentStep > 1}
+        uploadType={uploadType}
+        onChangeUploadType={changeUploadType}
+        imageUrl={imageUrl}
+        onChangeImageUrl={changeImageUrl}
+        onNext={submit}
+        onPrev={previousStep}
+      />
+    </div>
+  );
 }
 
 function mapStateToProps(state: State): StateProps {

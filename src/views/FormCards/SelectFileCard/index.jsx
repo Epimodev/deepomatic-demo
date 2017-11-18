@@ -36,6 +36,7 @@ function SelectFileCard(props: Props) {
   } = props;
 
   const selectValue = getSelectValue(uploadType);
+  const onNextClick = imageUrl ? onNext : null;
 
   return (
     <Card depth={depth} show={show}>
@@ -58,7 +59,7 @@ function SelectFileCard(props: Props) {
 
       <CardButtons>
         <Button onClick={onPrev}>{messages.PREVIOUS}</Button>
-        <Button onClick={onNext} isPrimary>{messages.LAUNCH_DETECTION}</Button>
+        <Button onClick={onNextClick} isPrimary>{messages.LAUNCH_DETECTION}</Button>
       </CardButtons>
     </Card>
   );

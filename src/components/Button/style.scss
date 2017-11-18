@@ -31,6 +31,20 @@ $borderWeight: 2px;
   }
 }
 
+.container_disabled {
+  opacity: 0.5;
+
+  &:hover {
+    &::after {
+      opacity: 0;
+    }
+  }
+
+  .button {
+    cursor: default;
+  }
+}
+
 .button {
   @include resetButton;
   position: relative;

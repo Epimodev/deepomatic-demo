@@ -26,6 +26,8 @@ function SelectTypeCard(props: Props) {
     depth, show, selected, onChange, onPrev, onNext,
   } = props;
 
+  const onNextClick = selected ? onNext : null;
+
   return (
     <Card depth={depth} show={show}>
       <CardTitle>{messages.TYPE_TO_DETECT}</CardTitle>
@@ -47,7 +49,7 @@ function SelectTypeCard(props: Props) {
 
       <CardButtons>
         <Button onClick={onPrev}>{messages.PREVIOUS}</Button>
-        <Button onClick={onNext} isPrimary>{messages.NEXT}</Button>
+        <Button onClick={onNextClick} isPrimary>{messages.NEXT}</Button>
       </CardButtons>
     </Card>
   );
