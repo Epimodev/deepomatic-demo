@@ -1,11 +1,26 @@
 // @flow
 import * as React from 'react';
+import { CSSTransition } from 'react-transition-group';
 import Card, { CardTitle, CardButtons } from 'src/components/Card';
 import Button from 'src/components/Button';
 import BinarySelect from 'src/components/BinarySelect';
 import InputText from 'src/components/InputText';
 import InputImage from 'src/components/InputImage';
 import messages from 'src/messages';
+import style from './style.scss';
+
+const URL_CLASSNAMES = {
+  enter: style.inputUrlEnter,
+  enterActive: style.inputUrlEnterActive,
+  exit: style.inputUrlExit,
+  exitActive: style.inputUrlExitActive,
+};
+const FILE_CLASSNAMES = {
+  enter: style.fileUrlEnter,
+  enterActive: style.fileUrlEnterActive,
+  exit: style.fileUrlExit,
+  exitActive: style.fileUrlExitActive,
+};
 
 type Props = {
   depth: number;
@@ -27,6 +42,17 @@ function getSelectValue(uploadType: 'url' | 'file' | '') {
   return '';
 }
 
+function submitIsAvailable(uploadType: 'url' | 'file' | '', imageUrl: string, fileValue: string) {
+  switch (uploadType) {
+    case 'url':
+      return !!imageUrl;
+    case 'file':
+      return !!fileValue;
+    default:
+      return false;
+  }
+}
+
 function SelectFileCard(props: Props) {
   const {
     depth,
@@ -43,7 +69,9 @@ function SelectFileCard(props: Props) {
   } = props;
 
   const selectValue = getSelectValue(uploadType);
-  const onNextClick = imageUrl ? onNext : null;
+  const onNextClick = submitIsAvailable(uploadType, imageUrl, fileValue)
+    ? onNext
+    : null;
 
   return (
     <Card depth={depth} show={show}>
@@ -56,21 +84,41 @@ function SelectFileCard(props: Props) {
         onChange={onChangeUploadType}
       />
 
-      <InputImage
-        label={messages.CLICK_OR_DROP_FILE}
-        successLabel={messages.FILE_SUCCESS}
-        error={fileError}
-        value={fileValue}
-        onChange={onChangeFile}
-      />
+      <div className={style.inputContainer}>
+        <CSSTransition
+          in={uploadType === 'url'}
+          classNames={URL_CLASSNAMES}
+          timeout={400}
+          mountOnEnter
+          unmountOnExit
+        >
+          <div className={style.inputUrl}>
+            <InputText
+              value={imageUrl}
+              label={messages.IMAGE_URL}
+              placeholder={messages.IMAGE_URL_PLACEHOLDER}
+              error="Error message"
+              onChange={onChangeImageUrl}
+            />
+          </div>
+        </CSSTransition>
 
-      {/* <InputText
-        value={imageUrl}
-        label={messages.IMAGE_URL}
-        placeholder={messages.IMAGE_URL_PLACEHOLDER}
-        error="Error message"
-        onChange={onChangeImageUrl}
-      /> */}
+        <CSSTransition
+          in={uploadType === 'file'}
+          classNames={FILE_CLASSNAMES}
+          timeout={400}
+          mountOnEnter
+          unmountOnExit
+        >
+          <InputImage
+            label={messages.CLICK_OR_DROP_FILE}
+            successLabel={messages.FILE_SUCCESS}
+            error={fileError}
+            value={fileValue}
+            onChange={onChangeFile}
+          />
+        </CSSTransition>
+      </div>
 
       <CardButtons>
         <Button onClick={onPrev}>{messages.PREVIOUS}</Button>
