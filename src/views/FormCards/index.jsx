@@ -7,27 +7,15 @@ import WelcomeCard from './WelcomeCard';
 import SelectTypeCard from './SelectTypeCard';
 import SelectFileCard from './SelectFileCard';
 import * as actions from './actions';
-import type { UploadType } from './types';
 
 type ComponentProps = {}
 
 type StateProps = {
   +currentStep: number;
-  +detectionType: string;
-  +uploadType: UploadType | '';
-  +imageUrl: string;
-  +fileValue: string;
-  +fileError: string;
 }
 
 type DispatchProps = {
-  changeType: (name: string, becomeChecked: boolean) => void;
-  changeUploadType: (value: 'left' | 'right') => void;
-  changeImageUrl: (value: string) => void;
-  changeFile: (file: File) => void;
   nextStep: () => void;
-  previousStep: () => void;
-  submit: () => void;
 }
 
 type Props = ComponentProps & StateProps & DispatchProps
@@ -35,18 +23,7 @@ type Props = ComponentProps & StateProps & DispatchProps
 function FormCards(props: Props) {
   const {
     currentStep,
-    detectionType,
-    uploadType,
-    imageUrl,
-    changeType,
-    changeUploadType,
-    changeImageUrl,
-    changeFile,
-    fileValue,
-    fileError,
     nextStep,
-    previousStep,
-    submit,
   } = props;
 
   return (
@@ -55,41 +32,24 @@ function FormCards(props: Props) {
       <SelectTypeCard
         depth={currentStep - 1}
         show={currentStep > 0}
-        selected={detectionType}
-        onChange={changeType}
-        onNext={nextStep}
-        onPrev={previousStep}
       />
       <SelectFileCard
         depth={currentStep - 2}
         show={currentStep > 1}
-        uploadType={uploadType}
-        onChangeUploadType={changeUploadType}
-        imageUrl={imageUrl}
-        onChangeImageUrl={changeImageUrl}
-        onChangeFile={changeFile}
-        fileValue={fileValue}
-        fileError={fileError}
-        onNext={submit}
-        onPrev={previousStep}
       />
     </div>
   );
 }
 
 function mapStateToProps(state: State): StateProps {
-  return state.configuration;
+  return {
+    currentStep: state.configuration.currentStep,
+  };
 }
 
 function mapDispatchToProps(dispatch: AppDispatch) {
   return bindActionCreators({
-    changeType: actions.changeType,
-    changeUploadType: actions.changeUploadType,
-    changeImageUrl: actions.changeImageUrl,
-    changeFile: actions.changeFile,
     nextStep: actions.nextStep,
-    previousStep: actions.previousStep,
-    submit: actions.submitConfiguration,
   }, dispatch);
 }
 

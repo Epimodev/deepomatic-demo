@@ -1,19 +1,31 @@
 // @flow
 import * as React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import type { State, AppDispatch } from 'src/store';
 import Card, { CardTitle, CardText, CardButtons } from 'src/components/Card';
 import Button from 'src/components/Button';
 import Checkbox from 'src/components/Checkbox';
 import messages from 'src/messages';
+import * as actions from '../actions';
 import style from './style.scss';
 
-type Props = {
-  depth: number;
-  show: boolean;
-  selected: string;
-  onChange: (name: string, value: boolean) => void;
-  onPrev: () => void;
-  onNext: () => void;
+type ComponentProps = {
+  +depth: number;
+  +show: boolean;
 }
+
+type StateProps = {
+  +selectedType: string;
+}
+
+type DispatchProps = {
+  +changeType: (name: string, value: boolean) => void;
+  +previousStep: () => void;
+  +nextStep: () => void;
+}
+
+type Props = ComponentProps & StateProps & DispatchProps
 
 const detectionTypes = [
   { name: 'fashion', label: messages.FASHION, color: 'pink' },
@@ -23,10 +35,10 @@ const detectionTypes = [
 
 function SelectTypeCard(props: Props) {
   const {
-    depth, show, selected, onChange, onPrev, onNext,
+    depth, show, selectedType, changeType, nextStep, previousStep,
   } = props;
 
-  const onNextClick = selected ? onNext : null;
+  const onNextClick = selectedType ? nextStep : null;
 
   return (
     <Card depth={depth} show={show}>
@@ -38,9 +50,9 @@ function SelectTypeCard(props: Props) {
           <Checkbox
             key={name}
             name={name}
-            checked={selected === name}
+            checked={selectedType === name}
             color={color}
-            onChange={onChange}
+            onChange={changeType}
           >
             {label}
           </Checkbox>
@@ -48,12 +60,25 @@ function SelectTypeCard(props: Props) {
       </div>
 
       <CardButtons>
-        <Button onClick={onPrev}>{messages.PREVIOUS}</Button>
+        <Button onClick={previousStep}>{messages.PREVIOUS}</Button>
         <Button onClick={onNextClick} isPrimary>{messages.NEXT}</Button>
       </CardButtons>
     </Card>
   );
 }
 
+function mapStateToProps(state: State): StateProps {
+  return {
+    selectedType: state.configuration.detectionType,
+  };
+}
 
-export default SelectTypeCard;
+function mapDispatchToProps(dispatch: AppDispatch) {
+  return bindActionCreators({
+    changeType: actions.changeType,
+    nextStep: actions.nextStep,
+    previousStep: actions.previousStep,
+  }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SelectTypeCard);

@@ -1,6 +1,9 @@
 // @flow
 import * as React from 'react';
 import { CSSTransition } from 'react-transition-group';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import type { State, AppDispatch } from 'src/store';
 import isURL from 'validator/lib/isURL';
 import Card, { CardTitle, CardButtons } from 'src/components/Card';
 import Button from 'src/components/Button';
@@ -8,6 +11,8 @@ import BinarySelect from 'src/components/BinarySelect';
 import InputText from 'src/components/InputText';
 import InputImage from 'src/components/InputImage';
 import messages from 'src/messages';
+import * as actions from '../actions';
+import type { UploadType } from '../types';
 import style from './style.scss';
 
 const URL_CLASSNAMES = {
@@ -23,19 +28,27 @@ const FILE_CLASSNAMES = {
   exitActive: style.fileUrlExitActive,
 };
 
-type Props = {
-  depth: number;
-  show: boolean;
-  uploadType: 'url' | 'file' | '';
-  onChangeUploadType: (value: 'left' | 'right') => void;
-  imageUrl: string;
-  onChangeImageUrl: (value: string) => void;
-  onChangeFile: (file: File) => void;
-  fileValue: string;
-  fileError: string;
-  onPrev: () => void;
-  onNext: () => void;
+type ComponentProps = {
+  +depth: number;
+  +show: boolean;
 }
+
+type StateProps = {
+  +uploadType: UploadType | '';
+  +imageUrl: string;
+  +fileValue: string;
+  +fileError: string;
+}
+
+type DispatchProps = {
+  +changeUploadType: (value: 'left' | 'right') => void;
+  +changeImageUrl: (value: string) => void;
+  +changeFile: (file: File) => void;
+  +previousStep: () => void;
+  +submit: () => void;
+}
+
+type Props = ComponentProps & StateProps & DispatchProps
 
 function getSelectValue(uploadType: 'url' | 'file' | '') {
   if (uploadType === 'url') return 'left';
@@ -65,20 +78,20 @@ function SelectFileCard(props: Props) {
     depth,
     show,
     uploadType,
-    onChangeUploadType,
+    changeUploadType,
     imageUrl,
-    onChangeImageUrl,
-    onChangeFile,
+    changeImageUrl,
+    changeFile,
     fileValue,
     fileError,
-    onPrev,
-    onNext,
+    previousStep,
+    submit,
   } = props;
 
   const selectValue = getSelectValue(uploadType);
   const urlError = getUrlError(imageUrl);
   const onNextClick = submitIsAvailable(uploadType, urlError, fileValue)
-    ? onNext
+    ? submit
     : null;
 
   return (
@@ -89,7 +102,7 @@ function SelectFileCard(props: Props) {
         value={selectValue}
         leftLabel={messages.ON_WEB}
         rightLabel={messages.ON_COMPUTER}
-        onChange={onChangeUploadType}
+        onChange={changeUploadType}
       />
 
       <div className={style.inputContainer}>
@@ -106,7 +119,7 @@ function SelectFileCard(props: Props) {
               label={messages.IMAGE_URL}
               placeholder={messages.IMAGE_URL_PLACEHOLDER}
               error={urlError}
-              onChange={onChangeImageUrl}
+              onChange={changeImageUrl}
             />
           </div>
         </CSSTransition>
@@ -123,18 +136,36 @@ function SelectFileCard(props: Props) {
             successLabel={messages.FILE_SUCCESS}
             error={fileError}
             value={fileValue}
-            onChange={onChangeFile}
+            onChange={changeFile}
           />
         </CSSTransition>
       </div>
 
       <CardButtons>
-        <Button onClick={onPrev}>{messages.PREVIOUS}</Button>
+        <Button onClick={previousStep}>{messages.PREVIOUS}</Button>
         <Button onClick={onNextClick} isPrimary>{messages.LAUNCH_DETECTION}</Button>
       </CardButtons>
     </Card>
   );
 }
 
+function mapStateToProps(state: State): StateProps {
+  return {
+    uploadType: state.configuration.uploadType,
+    imageUrl: state.configuration.imageUrl,
+    fileValue: state.configuration.fileValue,
+    fileError: state.configuration.fileError,
+  };
+}
 
-export default SelectFileCard;
+function mapDispatchToProps(dispatch: AppDispatch) {
+  return bindActionCreators({
+    changeUploadType: actions.changeUploadType,
+    changeImageUrl: actions.changeImageUrl,
+    changeFile: actions.changeFile,
+    previousStep: actions.previousStep,
+    submit: actions.submitConfiguration,
+  }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SelectFileCard);
