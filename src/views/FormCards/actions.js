@@ -1,5 +1,6 @@
 // @flow
 import type { ActionThunk } from 'src/store';
+import { detectObjects } from 'src/services/deepomatic';
 import messages from 'src/messages';
 import * as types from './types';
 
@@ -70,7 +71,23 @@ export function nextStep(): types.NextStepAction {
 }
 
 export function submitConfiguration(): ActionThunk {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const { configuration } = getState();
+
+    const data = configuration.uploadType === 'url'
+      ? configuration.imageUrl
+      : configuration.fileValue;
+
+    const query = {
+      detectorType: configuration.detectionType,
+      uploadType: configuration.uploadType,
+      data,
+    };
+
     dispatch({ type: 'SUBMIT_CONFIGURATION' });
+    detectObjects(query)
+      .then((detectionData) => {
+        console.log(detectionData);
+      });
   };
 }

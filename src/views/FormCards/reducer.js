@@ -4,7 +4,7 @@ import * as types from './types';
 const initialState: types.ConfigurationState = {
   currentStep: 0,
   detectionType: '',
-  uploadType: '',
+  uploadType: 'url',
   imageUrl: '',
   fileValue: '',
   fileError: '',

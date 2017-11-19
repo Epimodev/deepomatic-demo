@@ -3,8 +3,9 @@ import * as React from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import type { State, AppDispatch } from 'src/store';
 import isURL from 'validator/lib/isURL';
+import type { State, AppDispatch } from 'src/store';
+import type { UploadType } from 'src/services/deepomatic/types';
 import Card, { CardTitle, CardButtons } from 'src/components/Card';
 import Button from 'src/components/Button';
 import BinarySelect from 'src/components/BinarySelect';
@@ -12,7 +13,6 @@ import InputText from 'src/components/InputText';
 import InputImage from 'src/components/InputImage';
 import messages from 'src/messages';
 import * as actions from '../actions';
-import type { UploadType } from '../types';
 import style from './style.scss';
 
 const URL_CLASSNAMES = {
@@ -34,7 +34,7 @@ type ComponentProps = {
 }
 
 type StateProps = {
-  +uploadType: UploadType | '';
+  +uploadType: UploadType;
   +imageUrl: string;
   +fileValue: string;
   +fileError: string;

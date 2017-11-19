@@ -1,10 +1,10 @@
 // @flow
+import type { UploadType } from 'src/services/deepomatic/types';
 
-export type UploadType = 'url' | 'file';
 export type ConfigurationState = {
   +currentStep: number;
   +detectionType: string;
-  +uploadType: UploadType | '';
+  +uploadType: UploadType;
   +imageUrl: string;
   +fileValue: string;
   +fileError: string;
@@ -16,7 +16,7 @@ export type ChangeTypeAction = {
 }
 export type ChangeUpladTypeAction = {
   type: 'CHANGE_UPLOAD_TYPE';
-  payload: UploadType | '';
+  payload: UploadType;
 }
 export type ChangeImageUrlAction = {
   type: 'CHANGE_IMAGE_URL';
