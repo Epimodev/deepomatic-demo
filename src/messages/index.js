@@ -18,6 +18,7 @@ export default {
   CLICK_OR_DROP_FILE: 'Clic ou dépose un fichier ici',
   FILE_ERROR: 'Seulement les fichier jpg et png sont pris en charge',
   FILE_SUCCESS: 'L’image a bien été chargée !',
+  ANALYSING_IMAGE: 'Analyse de l‘image en cours',
   DETECTION_RESULTS: 'Résultat de la détection',
   DETECTED_ITEMS: 'Éléments détectés :',
   CHANGE_CONFIGURATION: 'Modifier la configuration',

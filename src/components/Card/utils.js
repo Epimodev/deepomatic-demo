@@ -16,7 +16,7 @@ function computeStyles0(depth: number): CardStyles {
   if (isStack) {
     const transformX = 20 * Math.sqrt(depth + -0.45);
     const scale = 1 - (0.05 * depth);
-    const opacity = 1 / (3 * depth);
+    const opacity = 1 / (1.75 * depth);
     return {
       cardStyle: { transform: `translateX(-${transformX}px) scale(${scale})` },
       contentStyle: { opacity },

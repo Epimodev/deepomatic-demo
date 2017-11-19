@@ -38,6 +38,7 @@ type StateProps = {
   +imageUrl: string;
   +fileValue: string;
   +fileError: string;
+  +isDetecting: boolean;
 }
 
 type DispatchProps = {
@@ -80,6 +81,7 @@ function SelectFileCard(props: Props) {
     uploadType,
     changeUploadType,
     imageUrl,
+    isDetecting,
     changeImageUrl,
     changeFile,
     fileValue,
@@ -95,7 +97,7 @@ function SelectFileCard(props: Props) {
     : null;
 
   return (
-    <Card depth={depth} show={show}>
+    <Card depth={depth} show={show} loading={isDetecting} loadingMessage={messages.ANALYSING_IMAGE}>
       <CardTitle>{messages.IMAGE_TO_DETECT}</CardTitle>
 
       <BinarySelect
@@ -155,6 +157,7 @@ function mapStateToProps(state: State): StateProps {
     imageUrl: state.configuration.imageUrl,
     fileValue: state.configuration.fileValue,
     fileError: state.configuration.fileError,
+    isDetecting: state.configuration.isDetecting,
   };
 }
 

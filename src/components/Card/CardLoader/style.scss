@@ -1,0 +1,98 @@
+@import "colors";
+
+.container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 100;
+  border-radius: 5px;
+  background-color: rgba(white, 0.82);
+  opacity: 1;
+  text-align: center;
+  font-size: 18px;
+  font-weight: normal;
+  color: $purple;
+  transition: 300ms;
+}
+.containerEnter {
+  opacity: 0;
+}
+.containerEnterActive {
+  opacity: 1;
+}
+.containerExit {
+  opacity: 1;
+}
+.containerExitActive {
+  opacity: 0;
+}
+
+.dots {
+  position: relative;
+  width: 100%;
+  height: 15px;
+  margin-top: 20px;
+  overflow: hidden;
+}
+.dot_1, .dot_2, .dot_3 {
+  position: absolute;
+  top: 0;
+  height: 10px;
+  transform-origin: 0;
+  animation: 3s infinite linear;
+
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: $purple;
+  }
+}
+.dot_1 {
+  left: 0;
+  right: -60px;
+  animation-name: dotMove1;
+}
+.dot_2 {
+  left: -30px;
+  right: -30px;
+  animation-name: dotMove2;
+}
+.dot_3 {
+  left: -60px;
+  right: 0;
+  animation-name: dotMove3;
+}
+
+@mixin animationStep1 { transform: translateX(0) scale(0.3); opacity: 0 }
+@mixin animationStep2 { transform: translateX(40%) scale(1); opacity: 1 }
+@mixin animationStep3 { transform: translateX(60%) scale(1); opacity: 1 }
+@mixin animationStep4 { transform: translateX(100%) scale(0.3); opacity: 0 }
+
+@keyframes dotMove1 {
+  0%   { @include animationStep1 }
+  15%  { @include animationStep2 }
+  85%  { @include animationStep3 }
+  100% { @include animationStep4 }
+}
+@keyframes dotMove2 {
+  0%   { @include animationStep1 }
+  18%  { @include animationStep2 }
+  88%  { @include animationStep3 }
+  100% { @include animationStep4 }
+}
+@keyframes dotMove3 {
+  0%   { @include animationStep1 }
+  21%  { @include animationStep2 }
+  91%  { @include animationStep3 }
+  100% { @include animationStep4 }
+}

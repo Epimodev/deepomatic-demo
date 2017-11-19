@@ -8,6 +8,7 @@ const initialState: types.ConfigurationState = {
   imageUrl: '',
   fileValue: '',
   fileError: '',
+  isDetecting: false,
 };
 
 export default function reducer(
@@ -51,6 +52,21 @@ export default function reducer(
       return {
         ...state,
         currentStep: state.currentStep + 1,
+      };
+    case 'LAUNCH_DETECTION':
+      return {
+        ...state,
+        isDetecting: true,
+      };
+    case 'DETECTION_ERROR':
+      return {
+        ...state,
+        isDetecting: false,
+      };
+    case 'DETECTION_SUCCESS':
+      return {
+        ...state,
+        isDetecting: false,
       };
     default:
       return state;

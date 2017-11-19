@@ -1,5 +1,6 @@
 // @flow
 import type { ActionThunk } from 'src/store';
+import { waitAtLeast } from 'src/utils/timeUtils';
 import { detectObjects } from 'src/services/deepomatic';
 import messages from 'src/messages';
 import * as types from './types';
@@ -84,10 +85,12 @@ export function submitConfiguration(): ActionThunk {
       data,
     };
 
-    dispatch({ type: 'SUBMIT_CONFIGURATION' });
-    detectObjects(query)
-      .then((detectionData) => {
-        console.log(detectionData);
-      });
+    dispatch({ type: 'LAUNCH_DETECTION' });
+    waitAtLeast(1000)()
+      .then(() => dispatch({ type: 'DETECTION_SUCCESS' }));
+    // detectObjects(query)
+    //   .then((detectionData) => {
+    //     console.log(detectionData);
+    //   });
   };
 }

@@ -8,6 +8,7 @@ export type ConfigurationState = {
   +imageUrl: string;
   +fileValue: string;
   +fileError: string;
+  +isDetecting: boolean;
 }
 
 export type ChangeTypeAction = {
@@ -36,8 +37,14 @@ export type PreviousStepAction = {
 export type NextStepAction = {
   type: 'NEXT_STEP';
 }
-export type SubmitAction = {
-  type: 'SUBMIT_CONFIGURATION';
+export type LaunchDetectionAction = {
+  type: 'LAUNCH_DETECTION';
+}
+export type ErrorDetectionAction = {
+  type: 'DETECTION_ERROR';
+}
+export type SuccessDetectionAction = {
+  type: 'DETECTION_SUCCESS';
 }
 
 export type Action =
@@ -48,4 +55,6 @@ export type Action =
   | SetImageFileErrorAction
   | PreviousStepAction
   | NextStepAction
-  | SubmitAction
+  | LaunchDetectionAction
+  | ErrorDetectionAction
+  | SuccessDetectionAction
