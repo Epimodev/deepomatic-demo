@@ -4,13 +4,15 @@ $transitionDuration: 300ms;
   position: relative;
 }
 
-.inputUrl {
+.animationContainer {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+  transition: $transitionDuration;
 }
+
 .inputUrlEnter {
   opacity: 0;
   transform: translateX(-100%);
@@ -18,7 +20,6 @@ $transitionDuration: 300ms;
 .inputUrlEnterActive {
   opacity: 1;
   transform: translateX(0);
-  transition: $transitionDuration;
 }
 .inputUrlExit {
   opacity: 1;
@@ -27,24 +28,21 @@ $transitionDuration: 300ms;
 .inputUrlExitActive {
   opacity: 0;
   transform: translateX(-100%);
-  transition: $transitionDuration;
 }
 
-.fileUrlEnter {
+.inputFileEnter {
   opacity: 0;
   transform: translateX(100%);
 }
-.fileUrlEnterActive {
-  opacity: 1;
-  transform: translateX(0);
-  transition: $transitionDuration;
-}
-.fileUrlExit {
+.inputFileEnterActive {
   opacity: 1;
   transform: translateX(0);
 }
-.fileUrlExitActive {
+.inputFileExit {
+  opacity: 1;
+  transform: translateX(0);
+}
+.inputFileExitActive {
   opacity: 0;
   transform: translateX(100%);
-  transition: $transitionDuration;
 }

@@ -1,4 +1,5 @@
 // @flow
+import type { Action } from 'src/store';
 import * as types from './types';
 
 const initialState: types.ConfigurationState = {
@@ -9,11 +10,12 @@ const initialState: types.ConfigurationState = {
   fileValue: '',
   fileError: '',
   isDetecting: false,
+  onboardingFinished: false,
 };
 
 export default function reducer(
   state: types.ConfigurationState = initialState,
-  action: types.Action,
+  action: Action,
 ): types.ConfigurationState {
   switch (action.type) {
     case 'CHANGE_DETECTION_TYPE':
@@ -67,6 +69,7 @@ export default function reducer(
       return {
         ...state,
         isDetecting: false,
+        onboardingFinished: true,
       };
     default:
       return state;

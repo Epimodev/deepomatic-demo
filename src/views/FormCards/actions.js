@@ -3,6 +3,7 @@ import type { ActionThunk } from 'src/store';
 import { waitAtLeast } from 'src/utils/timeUtils';
 import { detectObjects } from 'src/services/deepomatic';
 import messages from 'src/messages';
+import exampleData from 'example/data.json';
 import * as types from './types';
 
 export function changeType(name: string, becomeChecked: boolean): types.ChangeTypeAction {
@@ -87,8 +88,12 @@ export function submitConfiguration(): ActionThunk {
 
     dispatch({ type: 'LAUNCH_DETECTION' });
     waitAtLeast(1000)()
-      .then(() => dispatch({ type: 'DETECTION_SUCCESS' }));
+      .then(() => dispatch({
+        type: 'DETECTION_SUCCESS',
+        payload: exampleData,
+      }));
     // detectObjects(query)
+    //   .then(waitAtLeast(1000))
     //   .then((detectionData) => {
     //     console.log(detectionData);
     //   });

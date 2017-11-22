@@ -9,6 +9,7 @@ export type ConfigurationState = {
   +fileValue: string;
   +fileError: string;
   +isDetecting: boolean;
+  +onboardingFinished: boolean;
 }
 
 export type ChangeTypeAction = {
@@ -43,9 +44,6 @@ export type LaunchDetectionAction = {
 export type ErrorDetectionAction = {
   type: 'DETECTION_ERROR';
 }
-export type SuccessDetectionAction = {
-  type: 'DETECTION_SUCCESS';
-}
 
 export type Action =
   | ChangeTypeAction
@@ -57,4 +55,3 @@ export type Action =
   | NextStepAction
   | LaunchDetectionAction
   | ErrorDetectionAction
-  | SuccessDetectionAction

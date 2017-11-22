@@ -22,10 +22,10 @@ const URL_CLASSNAMES = {
   exitActive: style.inputUrlExitActive,
 };
 const FILE_CLASSNAMES = {
-  enter: style.fileUrlEnter,
-  enterActive: style.fileUrlEnterActive,
-  exit: style.fileUrlExit,
-  exitActive: style.fileUrlExitActive,
+  enter: style.inputFileEnter,
+  enterActive: style.inputFileEnterActive,
+  exit: style.inputFileExit,
+  exitActive: style.inputFileExitActive,
 };
 
 type ComponentProps = {
@@ -115,7 +115,7 @@ function SelectFileCard(props: Props) {
           mountOnEnter
           unmountOnExit
         >
-          <div className={style.inputUrl}>
+          <div className={style.animationContainer}>
             <InputText
               value={imageUrl}
               label={messages.IMAGE_URL}
@@ -133,13 +133,15 @@ function SelectFileCard(props: Props) {
           mountOnEnter
           unmountOnExit
         >
-          <InputImage
-            label={messages.CLICK_OR_DROP_FILE}
-            successLabel={messages.FILE_SUCCESS}
-            error={fileError}
-            value={fileValue}
-            onChange={changeFile}
-          />
+          <div className={style.animationContainer}>
+            <InputImage
+              label={messages.CLICK_OR_DROP_FILE}
+              successLabel={messages.FILE_SUCCESS}
+              error={fileError}
+              value={fileValue}
+              onChange={changeFile}
+            />
+          </div>
         </CSSTransition>
       </div>
 
