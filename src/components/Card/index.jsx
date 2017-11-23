@@ -15,6 +15,7 @@ type Props = {
   children: React.Element<any> | React.ChildrenArray<React.Element<any>>;
   loading: boolean;
   loadingMessage: string;
+  className: string;
 }
 
 const TRANSITION_CLASSNAMES = {
@@ -26,9 +27,10 @@ const TRANSITION_CLASSNAMES = {
 
 function Card(props: Props) {
   const {
-    depth, show, children, loading, loadingMessage,
+    depth, show, children, loading, loadingMessage, className,
   } = props;
 
+  const containerClass = classnames(style.container, className);
   const { cardStyle, contentStyle } = computeStyles(depth);
   const contentClass = classnames(style.content, {
     [style.content_blurred]: depth > 0 || loading,
@@ -42,7 +44,7 @@ function Card(props: Props) {
       mountOnEnter
       unmountOnExit
     >
-      <div className={style.container}>
+      <div className={containerClass}>
         <div style={cardStyle} className={style.card}>
           <div style={contentStyle} className={contentClass}>
             {children}
@@ -59,6 +61,7 @@ Card.defaultProps = {
   show: true,
   loading: false,
   loadingMessage: '',
+  className: '',
 };
 
 export default Card;

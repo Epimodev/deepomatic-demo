@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import type { State } from 'src/store';
 import FormCards from 'src/views/FormCards';
-// import DetectionResults from 'src/views/DetectionResults';
+import DetectionResults from 'src/views/DetectionResults';
 import style from './style.scss';
 
 type StateProps = {
@@ -15,7 +15,8 @@ function App(props: StateProps) {
 
   return (
     <div className={style.container}>
-      <FormCards show={!onboardingFinished} />
+      {/* <FormCards show={!onboardingFinished} /> */}
+      <DetectionResults />
     </div>
   );
 }
