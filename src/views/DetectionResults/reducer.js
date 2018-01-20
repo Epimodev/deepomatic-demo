@@ -3,6 +3,7 @@ import type { Action } from 'src/store';
 import * as types from './types';
 
 const initialState: types.ResultState = {
+  configIsDisplayed: false,
   boxes: {},
   width: 0,
   height: 0,
@@ -20,6 +21,16 @@ export default function reducer(
         boxes: action.payload.boxes,
         width: action.payload.width,
         height: action.payload.height,
+      };
+    case 'SHOW_RESULT_CONFIG':
+      return {
+        ...state,
+        configIsDisplayed: true,
+      };
+    case 'HIDE_RESULT_CONFIG':
+      return {
+        ...state,
+        configIsDisplayed: false,
       };
     default:
       return state;

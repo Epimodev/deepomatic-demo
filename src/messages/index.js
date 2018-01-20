@@ -26,5 +26,7 @@ export default {
   START: 'Commencer',
   PREVIOUS: 'Précédent',
   NEXT: 'Suivant',
+  CANCEL: 'Annuler',
   LAUNCH_DETECTION: 'Lancer l’analyse',
+  RELAUNCH_DETECTION: 'Relancer l’analyse',
 };

@@ -15,8 +15,8 @@ function App(props: StateProps) {
 
   return (
     <div className={style.container}>
-      {/* <FormCards show={!onboardingFinished} /> */}
-      <DetectionResults />
+      <FormCards show={!onboardingFinished} />
+      <DetectionResults show={onboardingFinished} />
     </div>
   );
 }

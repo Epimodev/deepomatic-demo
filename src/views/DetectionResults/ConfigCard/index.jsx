@@ -9,11 +9,12 @@ import Checkbox from 'src/components/Checkbox';
 import detectionTypes from 'src/constants/detectionTypes';
 import messages from 'src/messages';
 import * as actions from '../actions';
+import * as formActions from '../../FormCards/actions';
 import style from './style.scss';
 
 type ComponentProps = {
-  +depth: number;
   +show: boolean;
+  +containerClass: string;
 }
 
 type StateProps = {
@@ -22,21 +23,24 @@ type StateProps = {
 
 type DispatchProps = {
   +changeType: (name: string, value: boolean) => void;
-  +previousStep: () => void;
-  +nextStep: () => void;
+  +changeUploadType: (value: 'left' | 'right') => void;
+  +changeImageUrl: (value: string) => void;
+  +changeFile: (file: File) => void;
+  +hideConfig: () => void;
+  +submit: () => void;
 }
 
 type Props = ComponentProps & StateProps & DispatchProps
 
-function SelectTypeCard(props: Props) {
+function ConfigCard(props: Props) {
   const {
-    depth, show, selectedType, changeType, nextStep, previousStep,
+    show, containerClass,
+    selectedType,
+    changeType, hideConfig, submit,
   } = props;
 
-  const onNextClick = selectedType ? nextStep : null;
-
   return (
-    <Card depth={depth} show={show}>
+    <Card show={show} className={containerClass}>
       <CardTitle>{messages.TYPE_TO_DETECT}</CardTitle>
       <CardText>{messages.WHAT_TYPE_DETECT}</CardText>
 
@@ -55,8 +59,12 @@ function SelectTypeCard(props: Props) {
       </div>
 
       <CardButtons>
-        <Button onClick={previousStep}>{messages.PREVIOUS}</Button>
-        <Button onClick={onNextClick} isPrimary>{messages.NEXT}</Button>
+        <Button onClick={hideConfig}>
+          {messages.CANCEL}
+        </Button>
+        <Button onClick={submit} isPrimary>
+          {messages.RELAUNCH_DETECTION}
+        </Button>
       </CardButtons>
     </Card>
   );
@@ -70,10 +78,13 @@ function mapStateToProps(state: State): StateProps {
 
 function mapDispatchToProps(dispatch: AppDispatch) {
   return bindActionCreators({
-    changeType: actions.changeType,
-    nextStep: actions.nextStep,
-    previousStep: actions.previousStep,
+    changeType: formActions.changeType,
+    changeUploadType: formActions.changeUploadType,
+    changeImageUrl: formActions.changeImageUrl,
+    changeFile: formActions.changeFile,
+    submit: formActions.submitConfiguration,
+    hideConfig: actions.hideResultConfig,
   }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SelectTypeCard);
+export default connect(mapStateToProps, mapDispatchToProps)(ConfigCard);
