@@ -60,6 +60,7 @@ $transitionDuration: 400ms;
   border-radius: 5px;
   box-shadow: 0px 4px 10px rgba(#374699, 0.3);
   overflow: auto;
+  overflow-x: hidden;
   transition: opacity $transitionDuration, filter 0ms 100ms;
 }
 .content_blurred {
