@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { CSSTransition } from 'react-transition-group';
+import Transition from 'src/components/no-design/Transition';
 import classnames from 'classnames';
 import { computeStyles } from './utils';
 import style from './style.scss';
@@ -37,12 +37,10 @@ function Card(props: Props) {
   });
 
   return (
-    <CSSTransition
+    <Transition
       in={show}
       classNames={TRANSITION_CLASSNAMES}
       timeout={500}
-      mountOnEnter
-      unmountOnExit
     >
       <div className={containerClass}>
         <div style={cardStyle} className={style.card}>
@@ -52,7 +50,7 @@ function Card(props: Props) {
           <CardLoader show={loading} message={loadingMessage} />
         </div>
       </div>
-    </CSSTransition>
+    </Transition>
   );
 }
 

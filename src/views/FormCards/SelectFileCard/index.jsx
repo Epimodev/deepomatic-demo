@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { CSSTransition } from 'react-transition-group';
+import Transition from 'src/components/no-design/Transition';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import isURL from 'validator/lib/isURL';
@@ -108,12 +108,10 @@ function SelectFileCard(props: Props) {
       />
 
       <div className={style.inputContainer}>
-        <CSSTransition
+        <Transition
           in={uploadType === 'url'}
           classNames={URL_CLASSNAMES}
           timeout={400}
-          mountOnEnter
-          unmountOnExit
         >
           <div className={style.animationContainer}>
             <InputText
@@ -124,14 +122,12 @@ function SelectFileCard(props: Props) {
               onChange={changeImageUrl}
             />
           </div>
-        </CSSTransition>
+        </Transition>
 
-        <CSSTransition
+        <Transition
           in={uploadType === 'file'}
           classNames={FILE_CLASSNAMES}
           timeout={400}
-          mountOnEnter
-          unmountOnExit
         >
           <div className={style.animationContainer}>
             <InputImage
@@ -142,7 +138,7 @@ function SelectFileCard(props: Props) {
               onChange={changeFile}
             />
           </div>
-        </CSSTransition>
+        </Transition>
       </div>
 
       <CardButtons>

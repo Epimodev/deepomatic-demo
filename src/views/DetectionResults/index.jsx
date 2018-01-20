@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { CSSTransition } from 'react-transition-group';
+import Transition from 'src/components/no-design/Transition';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import type { State, AppDispatch } from 'src/store';
@@ -37,12 +37,10 @@ function DetectionResults(props: Props) {
   } = props;
 
   return (
-    <CSSTransition
+    <Transition
       in={show}
       classNames={TRANSITION_CLASSNAMES}
       timeout={800}
-      mountOnEnter
-      unmountOnExit
     >
       <div className={style.container}>
         <ResultsCard
@@ -56,7 +54,7 @@ function DetectionResults(props: Props) {
           containerClass={style.cardContainer}
         />
       </div>
-    </CSSTransition>
+    </Transition>
   );
 }
 

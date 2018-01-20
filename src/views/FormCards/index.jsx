@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { CSSTransition } from 'react-transition-group';
+import Transition from 'src/components/no-design/Transition';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import type { State, AppDispatch } from 'src/store';
@@ -39,12 +39,10 @@ function FormCards(props: Props) {
   } = props;
 
   return (
-    <CSSTransition
+    <Transition
       in={show}
       classNames={TRANSITION_CLASSNAMES}
       timeout={800}
-      mountOnEnter
-      unmountOnExit
     >
       <div className={style.container}>
         <WelcomeCard depth={currentStep} onStart={nextStep} />
@@ -57,7 +55,7 @@ function FormCards(props: Props) {
           show={currentStep > 1}
         />
       </div>
-    </CSSTransition>
+    </Transition>
   );
 }
 

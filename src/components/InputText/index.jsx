@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { CSSTransition } from 'react-transition-group';
+import Transition from 'src/components/no-design/Transition';
 import classnames from 'classnames';
 import style from './style.scss';
 
@@ -77,15 +77,13 @@ class InputText extends React.PureComponent<Props, State> {
           className={inputClass}
         />
         <hr className={style.border} />
-        <CSSTransition
+        <Transition
           in={showError}
           classNames={TRANSITION_ERROR_CLASSNAMES}
           timeout={300}
-          mountOnEnter
-          unmountOnExit
         >
           <span className={style.error}>{error}</span>
-        </CSSTransition>
+        </Transition>
       </div>
     );
   }

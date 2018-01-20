@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { CSSTransition } from 'react-transition-group';
+import Transition from 'src/components/no-design/Transition';
 import style from './style.scss';
 
 type Props = {
@@ -19,12 +19,10 @@ function CardLoader(props: Props) {
   const { show, message } = props;
 
   return (
-    <CSSTransition
+    <Transition
       in={show}
       classNames={TRANSITION_CLASSNAMES}
       timeout={300}
-      mountOnEnter
-      unmountOnExit
     >
       <div className={style.container}>
         {message}
@@ -34,7 +32,7 @@ function CardLoader(props: Props) {
           <div className={style.dot_3} />
         </div>
       </div>
-    </CSSTransition>
+    </Transition>
   );
 }
 
