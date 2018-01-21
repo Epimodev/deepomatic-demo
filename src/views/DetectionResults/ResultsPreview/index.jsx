@@ -47,7 +47,7 @@ class ResultsPreview extends React.PureComponent<Props, ComponentState> {
 
   componentDidMount() {
     window.addEventListener('resize', this.updateContainerSizeBind);
-    this.updateContainerSize();
+    setTimeout(() => this.updateContainerSize(), 20);
   }
 
   componentWillUnmount() {
