@@ -14,6 +14,15 @@ export type SuccessDetectionAction = {
   payload: DetectionResponse;
 }
 
+export type OverDetectedKeyAction = {
+  type: 'OVER_DETECTED_TYPE';
+  payload: string;
+}
+
+export type LeaveDetectedKeyAction = {
+  type: 'LEAVE_DETECTED_TYPE';
+}
+
 export type ShowResultConfigAction = {
   type: 'SHOW_RESULT_CONFIG';
 }
@@ -24,5 +33,7 @@ export type HideResultConfigAction = {
 
 export type Action =
   | SuccessDetectionAction
+  | OverDetectedKeyAction
+  | LeaveDetectedKeyAction
   | ShowResultConfigAction
   | HideResultConfigAction

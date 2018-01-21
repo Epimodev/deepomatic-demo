@@ -1,0 +1,29 @@
+@import "colors";
+
+.listTitle {
+  margin: 20px 0 5px 5px;
+  font-size: 18px;
+}
+
+.list {
+  margin: 0 0 0 7px;
+  padding: 0;
+  list-style-type: none;
+}
+
+.item {
+  padding: 5px 0;
+  transition: 300ms;
+  span {
+    display: inline-block;
+    margin-right: 5px;
+    transition: 300ms;
+  }
+}
+.item_hidden {
+  opacity: 0.25;
+  span {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}

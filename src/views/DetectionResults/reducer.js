@@ -23,6 +23,16 @@ export default function reducer(
         height: action.payload.height,
         configIsDisplayed: false,
       };
+    case 'OVER_DETECTED_TYPE':
+      return {
+        ...state,
+        overKey: action.payload,
+      };
+    case 'LEAVE_DETECTED_TYPE':
+      return {
+        ...state,
+        overKey: '',
+      };
     case 'SHOW_RESULT_CONFIG':
       return {
         ...state,
