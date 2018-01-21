@@ -11,6 +11,12 @@ const initialState: types.ConfigurationState = {
   fileError: '',
   isDetecting: false,
   onboardingFinished: false,
+  detectedConfig: {
+    detectionType: '',
+    uploadType: 'url',
+    imageUrl: '',
+    fileValue: '',
+  },
 };
 
 export default function reducer(
@@ -70,6 +76,20 @@ export default function reducer(
         ...state,
         isDetecting: false,
         onboardingFinished: true,
+        detectedConfig: {
+          detectionType: state.detectionType,
+          uploadType: state.uploadType,
+          imageUrl: state.imageUrl,
+          fileValue: state.fileValue,
+        },
+      };
+    case 'HIDE_RESULT_CONFIG':
+      return {
+        ...state,
+        detectionType: state.detectedConfig.detectionType,
+        uploadType: state.detectedConfig.uploadType,
+        imageUrl: state.detectedConfig.imageUrl,
+        fileValue: state.detectedConfig.fileValue,
       };
     default:
       return state;

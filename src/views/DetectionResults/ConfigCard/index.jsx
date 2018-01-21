@@ -46,7 +46,8 @@ function ConfigCard(props: Props) {
   } = props;
 
   const urlError = getUrlError(imageUrl);
-  const onSubmit = imageIsFilled(uploadType, urlError, fileValue)
+  const formIsFilled = !!selectedType && imageIsFilled(uploadType, urlError, fileValue)
+  const onSubmit = formIsFilled
     ? submit
     : null;
 

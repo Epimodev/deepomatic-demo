@@ -142,9 +142,10 @@ class ResultsPreview extends React.PureComponent<Props, ComponentState> {
 }
 
 function mapStateToProps(state: State): StateProps {
-  const imageUrl = state.configuration.uploadType === 'url'
-    ? state.configuration.imageUrl
-    : state.configuration.fileValue;
+  const config = state.configuration.detectedConfig;
+  const imageUrl = config.uploadType === 'url'
+    ? config.imageUrl
+    : config.fileValue;
   return {
     imageUrl,
   };

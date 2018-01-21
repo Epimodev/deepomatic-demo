@@ -1,6 +1,13 @@
 // @flow
 import type { UploadType } from 'src/services/deepomatic/types';
 
+type Configuration = {
+  +detectionType: string;
+  +uploadType: UploadType;
+  +imageUrl: string;
+  +fileValue: string;
+}
+
 export type ConfigurationState = {
   +currentStep: number;
   +detectionType: string;
@@ -10,6 +17,7 @@ export type ConfigurationState = {
   +fileError: string;
   +isDetecting: boolean;
   +onboardingFinished: boolean;
+  +detectedConfig: Configuration;
 }
 
 export type ChangeTypeAction = {

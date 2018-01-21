@@ -21,6 +21,7 @@ export default function reducer(
         boxes: action.payload.boxes,
         width: action.payload.width,
         height: action.payload.height,
+        configIsDisplayed: false,
       };
     case 'SHOW_RESULT_CONFIG':
       return {
