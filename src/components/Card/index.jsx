@@ -7,7 +7,7 @@ import style from './style.scss';
 import CardTitle from './CardTitle';
 import CardText from './CardText';
 import CardButtons from './CardButtons';
-import CardLoader from './CardLoader';
+import AppLoader from '../AppLoader';
 
 type Props = {
   depth: number;
@@ -47,7 +47,7 @@ function Card(props: Props) {
           <div style={contentStyle} className={contentClass}>
             {children}
           </div>
-          <CardLoader show={loading} message={loadingMessage} />
+          <AppLoader show={loading} message={loadingMessage} />
         </div>
       </div>
     </Transition>
@@ -63,4 +63,4 @@ Card.defaultProps = {
 };
 
 export default Card;
-export { CardTitle, CardText, CardButtons, CardLoader };
+export { CardTitle, CardText, CardButtons };

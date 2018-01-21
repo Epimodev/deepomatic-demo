@@ -15,7 +15,7 @@ const TRANSITION_CLASSNAMES = {
   exitActive: style.containerExitActive,
 };
 
-function CardLoader(props: Props) {
+function AppLoader(props: Props) {
   const { show, message } = props;
 
   return (
@@ -36,4 +36,4 @@ function CardLoader(props: Props) {
   );
 }
 
-export default CardLoader;
+export default AppLoader;

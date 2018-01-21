@@ -4,6 +4,8 @@ declare module.exports: {|
   +'container': string;
   +'containerEnter': string;
   +'containerEnterActive': string;
+  +'parts': string;
+  +'parts_overlayed': string;
   +'previewPart': string;
   +'resultsPart': string;
 |};

@@ -1,9 +1,12 @@
 // @flow
 import * as React from 'react';
+import classnames from 'classnames';
 import Transition from 'src/components/no-design/Transition';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import type { State, AppDispatch } from 'src/store';
+import AppLoader from 'src/components/AppLoader';
+import messages from 'src/messages';
 import ResultsPreview from './ResultsPreview';
 import ResultsCard from './ResultsCard';
 import ConfigCard from './ConfigCard';
@@ -17,6 +20,7 @@ type ComponentProps = {
 type StateProps = {
   +configIsDisplayed: boolean;
   +detectedObjects: string[];
+  +isDetecting: boolean;
 }
 
 type DispatchProps = {
@@ -34,8 +38,12 @@ const TRANSITION_CLASSNAMES = {
 
 function DetectionResults(props: Props) {
   const {
-    show, configIsDisplayed, detectedObjects, openConfig,
+    show, configIsDisplayed, detectedObjects, isDetecting, openConfig,
   } = props;
+
+  const partsClass = classnames(style.parts, {
+    [style.parts_overlayed]: isDetecting,
+  });
 
   return (
     <Transition
@@ -44,17 +52,20 @@ function DetectionResults(props: Props) {
       timeout={800}
     >
       <div className={style.container}>
-        <div className={style.previewPart}>
-          <ResultsPreview />
+        <div className={partsClass}>
+          <div className={style.previewPart}>
+            <ResultsPreview />
+          </div>
+          <div className={style.resultsPart}>
+            <ResultsCard
+              hidden={configIsDisplayed}
+              detectedObjects={detectedObjects}
+              openConfig={openConfig}
+            />
+            <ConfigCard show={configIsDisplayed} />
+          </div>
         </div>
-        <div className={style.resultsPart}>
-          <ResultsCard
-            hidden={configIsDisplayed}
-            detectedObjects={detectedObjects}
-            openConfig={openConfig}
-          />
-          <ConfigCard show={configIsDisplayed} />
-        </div>
+        <AppLoader show={isDetecting} message={messages.ANALYSING_IMAGE} />
       </div>
     </Transition>
   );
@@ -66,6 +77,7 @@ function mapStateToProps(state: State): StateProps {
   return {
     configIsDisplayed: state.result.configIsDisplayed,
     detectedObjects: Object.keys(state.result.boxes),
+    isDetecting: state.configuration.isDetecting,
   };
 }
 
