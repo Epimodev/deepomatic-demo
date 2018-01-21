@@ -1,3 +1,20 @@
+@import "responsive";
+
+.configCard {
+  div {
+    max-height: 580px;
+  }
+}
+
 .types {
   position: relative;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  min-height: 115px;
+  @include phone {
+    flex-direction: column;
+    align-items: center;
+  }
 }

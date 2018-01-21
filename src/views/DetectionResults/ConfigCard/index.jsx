@@ -3,10 +3,13 @@ import * as React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import type { State, AppDispatch } from 'src/store';
-import Card, { CardTitle, CardText, CardButtons } from 'src/components/Card';
+import type { UploadType } from 'src/services/deepomatic/types';
+import { imageIsFilled, getUrlError } from 'src/utils/formUtils';
+import Card, { CardTitle, CardButtons } from 'src/components/Card';
 import Button from 'src/components/Button';
 import Checkbox from 'src/components/Checkbox';
 import detectionTypes from 'src/constants/detectionTypes';
+import ImageSelector from 'src/components/ImageSelector';
 import messages from 'src/messages';
 import * as actions from '../actions';
 import * as formActions from '../../FormCards/actions';
@@ -18,6 +21,10 @@ type ComponentProps = {
 
 type StateProps = {
   +selectedType: string;
+  +uploadType: UploadType;
+  +imageUrl: string;
+  +fileValue: string;
+  +fileError: string;
 }
 
 type DispatchProps = {
@@ -34,15 +41,18 @@ type Props = ComponentProps & StateProps & DispatchProps
 function ConfigCard(props: Props) {
   const {
     show,
-    selectedType,
-    changeType, hideConfig, submit,
+    selectedType, uploadType, imageUrl, fileValue, fileError,
+    changeType, changeUploadType, changeImageUrl, changeFile, hideConfig, submit,
   } = props;
 
-  return (
-    <Card show={show}>
-      <CardTitle>{messages.TYPE_TO_DETECT}</CardTitle>
-      <CardText>{messages.WHAT_TYPE_DETECT}</CardText>
+  const urlError = getUrlError(imageUrl);
+  const onSubmit = imageIsFilled(uploadType, urlError, fileValue)
+    ? submit
+    : null;
 
+  return (
+    <Card show={show} className={style.configCard}>
+      <CardTitle>{messages.TYPE_TO_DETECT}</CardTitle>
       <div className={style.types}>
         {detectionTypes.map(({ name, label, color }) => (
           <Checkbox
@@ -57,11 +67,23 @@ function ConfigCard(props: Props) {
         ))}
       </div>
 
+      <CardTitle>{messages.IMAGE_TO_DETECT}</CardTitle>
+      <ImageSelector
+        uploadType={uploadType}
+        imageUrl={imageUrl}
+        urlError={urlError}
+        fileValue={fileValue}
+        fileError={fileError}
+        changeUploadType={changeUploadType}
+        changeImageUrl={changeImageUrl}
+        changeFile={changeFile}
+      />
+
       <CardButtons>
         <Button onClick={hideConfig}>
           {messages.CANCEL}
         </Button>
-        <Button onClick={submit} isPrimary>
+        <Button onClick={onSubmit} isPrimary>
           {messages.RELAUNCH_DETECTION}
         </Button>
       </CardButtons>
@@ -72,6 +94,10 @@ function ConfigCard(props: Props) {
 function mapStateToProps(state: State): StateProps {
   return {
     selectedType: state.configuration.detectionType,
+    uploadType: state.configuration.uploadType,
+    imageUrl: state.configuration.imageUrl,
+    fileValue: state.configuration.fileValue,
+    fileError: state.configuration.fileError,
   };
 }
 

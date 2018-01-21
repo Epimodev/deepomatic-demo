@@ -1,32 +1,15 @@
 // @flow
 import * as React from 'react';
-import Transition from 'src/components/no-design/Transition';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import isURL from 'validator/lib/isURL';
 import type { State, AppDispatch } from 'src/store';
 import type { UploadType } from 'src/services/deepomatic/types';
+import { imageIsFilled, getUrlError } from 'src/utils/formUtils';
 import Card, { CardTitle, CardButtons } from 'src/components/Card';
 import Button from 'src/components/Button';
-import BinarySelect from 'src/components/BinarySelect';
-import InputText from 'src/components/InputText';
-import InputImage from 'src/components/InputImage';
+import ImageSelector from 'src/components/ImageSelector';
 import messages from 'src/messages';
 import * as actions from '../actions';
-import style from './style.scss';
-
-const URL_CLASSNAMES = {
-  enter: style.inputUrlEnter,
-  enterActive: style.inputUrlEnterActive,
-  exit: style.inputUrlExit,
-  exitActive: style.inputUrlExitActive,
-};
-const FILE_CLASSNAMES = {
-  enter: style.inputFileEnter,
-  enterActive: style.inputFileEnterActive,
-  exit: style.inputFileExit,
-  exitActive: style.inputFileExitActive,
-};
 
 type ComponentProps = {
   +depth: number;
@@ -51,29 +34,6 @@ type DispatchProps = {
 
 type Props = ComponentProps & StateProps & DispatchProps
 
-function getSelectValue(uploadType: 'url' | 'file' | '') {
-  if (uploadType === 'url') return 'left';
-  if (uploadType === 'file') return 'right';
-  return '';
-}
-
-function submitIsAvailable(uploadType: 'url' | 'file' | '', imageUrlError: string, fileValue: string): boolean {
-  switch (uploadType) {
-    case 'url':
-      return !imageUrlError;
-    case 'file':
-      return !!fileValue;
-    default:
-      return false;
-  }
-}
-
-function getUrlError(imageUrl: string): string {
-  if (!imageUrl) return messages.EMPTY_URL;
-  if (!isURL(imageUrl)) return messages.INVALID_URL;
-  return '';
-}
-
 function SelectFileCard(props: Props) {
   const {
     depth,
@@ -90,9 +50,8 @@ function SelectFileCard(props: Props) {
     submit,
   } = props;
 
-  const selectValue = getSelectValue(uploadType);
   const urlError = getUrlError(imageUrl);
-  const onNextClick = submitIsAvailable(uploadType, urlError, fileValue)
+  const onNextClick = imageIsFilled(uploadType, urlError, fileValue)
     ? submit
     : null;
 
@@ -100,46 +59,16 @@ function SelectFileCard(props: Props) {
     <Card depth={depth} show={show} loading={isDetecting} loadingMessage={messages.ANALYSING_IMAGE}>
       <CardTitle>{messages.IMAGE_TO_DETECT}</CardTitle>
 
-      <BinarySelect
-        value={selectValue}
-        leftLabel={messages.ON_WEB}
-        rightLabel={messages.ON_COMPUTER}
-        onChange={changeUploadType}
+      <ImageSelector
+        uploadType={uploadType}
+        imageUrl={imageUrl}
+        urlError={urlError}
+        fileValue={fileValue}
+        fileError={fileError}
+        changeUploadType={changeUploadType}
+        changeImageUrl={changeImageUrl}
+        changeFile={changeFile}
       />
-
-      <div className={style.inputContainer}>
-        <Transition
-          in={uploadType === 'url'}
-          classNames={URL_CLASSNAMES}
-          timeout={400}
-        >
-          <div className={style.animationContainer}>
-            <InputText
-              value={imageUrl}
-              label={messages.IMAGE_URL}
-              placeholder={messages.IMAGE_URL_PLACEHOLDER}
-              error={urlError}
-              onChange={changeImageUrl}
-            />
-          </div>
-        </Transition>
-
-        <Transition
-          in={uploadType === 'file'}
-          classNames={FILE_CLASSNAMES}
-          timeout={400}
-        >
-          <div className={style.animationContainer}>
-            <InputImage
-              label={messages.CLICK_OR_DROP_FILE}
-              successLabel={messages.FILE_SUCCESS}
-              error={fileError}
-              value={fileValue}
-              onChange={changeFile}
-            />
-          </div>
-        </Transition>
-      </div>
 
       <CardButtons>
         <Button onClick={previousStep}>{messages.PREVIOUS}</Button>
