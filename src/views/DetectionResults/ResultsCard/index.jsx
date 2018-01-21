@@ -7,19 +7,18 @@ import messages from 'src/messages';
 type Props = {
   +hidden: boolean;
   +detectedObjects: string[];
-  +containerClass: string;
   +openConfig: () => void;
 }
 
 function ResultCard(props: Props) {
   const {
-    hidden, detectedObjects, containerClass, openConfig,
+    hidden, detectedObjects, openConfig,
   } = props;
 
   const cardDepth = hidden ? 1 : 0;
 
   return (
-    <Card depth={cardDepth} className={containerClass}>
+    <Card depth={cardDepth}>
       <CardTitle>{messages.DETECTION_RESULTS}</CardTitle>
 
       <span>{messages.DETECTED_ITEMS}</span>

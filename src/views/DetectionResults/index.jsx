@@ -4,6 +4,7 @@ import Transition from 'src/components/no-design/Transition';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import type { State, AppDispatch } from 'src/store';
+import ResultsPreview from './ResultsPreview';
 import ResultsCard from './ResultsCard';
 import ConfigCard from './ConfigCard';
 import * as actions from './actions';
@@ -43,16 +44,17 @@ function DetectionResults(props: Props) {
       timeout={800}
     >
       <div className={style.container}>
-        <ResultsCard
-          hidden={configIsDisplayed}
-          containerClass={style.cardContainer}
-          detectedObjects={detectedObjects}
-          openConfig={openConfig}
-        />
-        <ConfigCard
-          show={configIsDisplayed}
-          containerClass={style.cardContainer}
-        />
+        <div className={style.previewPart}>
+          <ResultsPreview />
+        </div>
+        <div className={style.resultsPart}>
+          <ResultsCard
+            hidden={configIsDisplayed}
+            detectedObjects={detectedObjects}
+            openConfig={openConfig}
+          />
+          <ConfigCard show={configIsDisplayed} />
+        </div>
       </div>
     </Transition>
   );

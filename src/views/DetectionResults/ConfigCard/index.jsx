@@ -14,7 +14,6 @@ import style from './style.scss';
 
 type ComponentProps = {
   +show: boolean;
-  +containerClass: string;
 }
 
 type StateProps = {
@@ -34,13 +33,13 @@ type Props = ComponentProps & StateProps & DispatchProps
 
 function ConfigCard(props: Props) {
   const {
-    show, containerClass,
+    show,
     selectedType,
     changeType, hideConfig, submit,
   } = props;
 
   return (
-    <Card show={show} className={containerClass}>
+    <Card show={show}>
       <CardTitle>{messages.TYPE_TO_DETECT}</CardTitle>
       <CardText>{messages.WHAT_TYPE_DETECT}</CardText>
 
