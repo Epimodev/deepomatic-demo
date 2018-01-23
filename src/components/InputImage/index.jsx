@@ -110,6 +110,10 @@ class InputImage extends React.PureComponent<Props, State> {
       const file = currentTarget.files[0];
       this.props.onChange(file);
       currentTarget.value = '';
+      const dropZone = currentTarget.parentElement && currentTarget.parentElement.parentElement;
+      setTimeout(() => {
+        if (dropZone instanceof HTMLElement) dropZone.blur();
+      }, 50);
     }
   }
 

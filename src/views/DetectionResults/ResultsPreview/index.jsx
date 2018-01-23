@@ -133,7 +133,7 @@ class ResultsPreview extends React.PureComponent<Props, ComponentState> {
             alt="Detection Preview"
             onLoad={this.onImageLoadBind}
             ref={this.setImageNodeBind}
-            style={contentCss}
+            className={style.image}
           />
         </div>
       </div>

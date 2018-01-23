@@ -3,4 +3,5 @@
 declare module.exports: {|
   +'container': string;
   +'content': string;
+  +'image': string;
 |};
