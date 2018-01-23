@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import type { State, AppDispatch } from 'src/store';
 import AppLoader from 'src/components/AppLoader';
 import messages from 'src/messages';
-import ResultsPreview from './ResultsPreview';
+import PreviewArea from './PreviewArea';
 import ResultsCard from './ResultsCard';
 import ConfigCard from './ConfigCard';
 import * as actions from './actions';
@@ -54,7 +54,7 @@ function DetectionResults(props: Props) {
       <div className={style.container}>
         <div className={partsClass}>
           <div className={style.previewPart}>
-            <ResultsPreview />
+            <PreviewArea />
           </div>
           <div className={style.resultsPart}>
             <ResultsCard

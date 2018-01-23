@@ -21,7 +21,7 @@ type ComponentState = {
   containerWidth: number;
 }
 
-class ResultsPreview extends React.PureComponent<Props, ComponentState> {
+class PreviewArea extends React.PureComponent<Props, ComponentState> {
   static defaultProps = {}
   updateContainerSizeBind: () => void
   onImageLoadBind: () => void
@@ -151,4 +151,4 @@ function mapStateToProps(state: State): StateProps {
   };
 }
 
-export default connect(mapStateToProps)(ResultsPreview);
+export default connect(mapStateToProps)(PreviewArea);
