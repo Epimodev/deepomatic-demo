@@ -3,6 +3,7 @@ import * as React from 'react';
 // import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import type { State /*, AppDispatch */ } from 'src/store';
+import ImageResults from 'src/components/ImageResults';
 import style from './style.scss';
 
 type ComponentProps = {}
@@ -135,6 +136,7 @@ class PreviewArea extends React.PureComponent<Props, ComponentState> {
             ref={this.setImageNodeBind}
             className={style.image}
           />
+          <ImageResults />
         </div>
       </div>
     );
