@@ -120,10 +120,10 @@ class PreviewArea extends React.PureComponent<Props, ComponentState> {
 
   render() {
     const { imageUrl } = this.props;
-    const imageSize = this.computeImageSize();
+    const { width, height } = this.computeImageSize();
     const contentCss = {
-      width: `${imageSize.width}px`,
-      height: `${imageSize.height}px`,
+      width: `${width}px`,
+      height: `${height}px`,
     };
 
     return (
@@ -136,7 +136,7 @@ class PreviewArea extends React.PureComponent<Props, ComponentState> {
             ref={this.setImageNodeBind}
             className={style.image}
           />
-          <ImageResults />
+          <ImageResults width={width} height={height} />
         </div>
       </div>
     );

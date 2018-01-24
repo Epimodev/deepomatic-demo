@@ -1,57 +1,54 @@
 // @flow
 import * as React from 'react';
 import * as PIXI from 'pixi.js';
-import style from './style.scss';
 
-type Props = {}
+type Props = {
+  width: number;
+  height: number;
+}
 
 type State = {}
 
-class ImageResults extends React.PureComponent<Props, State> {
-  container: HTMLDivElement | null
+class ImageResults extends React.Component<Props, State> {
+  canvas: HTMLCanvasElement | null
   pixiApp: any
-  resizeCanvasBind: () => void
-  setContainerBind: (reference: HTMLDivElement | null) => void
+  setCanvasBind: (reference: HTMLCanvasElement | null) => void
 
   constructor(props: Props) {
     super(props);
 
-    this.resizeCanvasBind = this.resizeCanvas.bind(this);
-    this.setContainerBind = this.setContainer.bind(this);
+    this.setCanvasBind = this.setCanvas.bind(this);
+  }
+
+  shouldComponentUpdate() {
+    return false;
   }
 
   componentDidMount() {
-    if (this.container) {
-      this.pixiApp = new PIXI.Application();
+    if (this.canvas) {
+      this.pixiApp = new PIXI.Application({ view: this.canvas });
       this.pixiApp.renderer.autoResize = true;
-      this.container.appendChild(this.pixiApp.view);
 
-      window.addEventListener('resize', this.resizeCanvasBind);
-      this.resizeCanvas();
+      this.resizeCanvas(this.props);
     }
   }
 
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.resizeCanvasBind);
+  componentWillReceiveProps(nextProps: Props) {
+    this.resizeCanvas(nextProps);
   }
 
-  resizeCanvas() {
-    setTimeout(() => {
-      if (this.container) {
-        const width = this.container.offsetWidth;
-        const height = this.container.offsetHeight;
-        this.pixiApp.renderer.resize(width, height);
-      }
-    }, 50);
+  resizeCanvas(props: Props) {
+    const { width, height } = props;
+    this.pixiApp.renderer.resize(width, height);
   }
 
-  setContainer(reference: HTMLDivElement | null) {
-    this.container = reference;
+  setCanvas(reference: HTMLCanvasElement | null) {
+    this.canvas = reference;
   }
 
   render() {
     return (
-      <div ref={this.setContainerBind} className={style.container} />
+      <canvas ref={this.setCanvasBind} />
     );
   }
 }
