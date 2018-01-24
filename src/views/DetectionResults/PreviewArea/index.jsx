@@ -136,7 +136,7 @@ class PreviewArea extends React.PureComponent<Props, ComponentState> {
             ref={this.setImageNodeBind}
             className={style.image}
           />
-          <ImageResults width={width} height={height} />
+          <ImageResults url={imageUrl} width={width} height={height} />
         </div>
       </div>
     );
