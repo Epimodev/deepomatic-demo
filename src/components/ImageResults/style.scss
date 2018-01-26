@@ -22,9 +22,40 @@
   filter: blur(5px) saturate(50%);
   opacity: 1;
   transform: scale(1.01);
-  transition: 500ms;
+  transition: 300ms;
 }
 .blurredImage_hide {
+  transition: 1000ms;
   opacity: 0;
   transform: scale(1);
 }
+
+.areaEnter {
+  opacity: 0;
+  transform: scale(0.5);
+}
+.areaEnterActive {
+  opacity: 1;
+  transform: scale(1);
+  animation: areaEnter 300ms;
+}
+.areaExit {
+  opacity: 1;
+  transform: scale(1);
+}
+.areaExitActive {
+  opacity: 0;
+  transform: scale(0.5);
+  animation: areaLeave 300ms;
+}
+
+@keyframes areaEnter {
+  0%   { opacity: 0; transform: scale(0); }
+  75%  { opacity: 1; transform: scale(1.05) }
+  100% { opacity: 1; transform: scale(1) }
+}
+@keyframes areaLeave {
+  0%   { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.5) }
+}
+

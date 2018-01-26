@@ -1,0 +1,12 @@
+.container {
+  position: absolute;
+  overflow: hidden;
+  border: 1px solid rgba(white, 0.3);
+  box-shadow: 0 0 50px rgba(black, 0.8);
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.imageBox {
+  position: absolute;
+}
