@@ -2,6 +2,7 @@
 import * as React from 'react';
 import classnames from 'classnames';
 import Transition from '../no-design/Transition';
+import AreaPoint from './AreaPoint';
 import AreaFocus from './AreaFocus';
 import style from './style.scss';
 
@@ -53,12 +54,18 @@ class ImageResults extends React.Component<Props, State> {
     });
 
     return (
-      <div className={style.container} onClick={this.onSelectAreaBind}>
+      <div className={style.container}>
         <img src={url} alt="preview" className={style.image} />
         <img src={url} alt="preview" className={blurredClass} />
         <Transition in={areaSelected} classNames={ANIMATION_CLASSNAMES} timeout={500}>
           <AreaFocus imageUrl={url} imageWidth={width} imageHeight={height} box={testBox} />
         </Transition>
+        <AreaPoint
+          onClick={this.onSelectAreaBind}
+          imageWidth={width}
+          imageHeight={height}
+          box={testBox}
+        />
       </div>
     );
   }
