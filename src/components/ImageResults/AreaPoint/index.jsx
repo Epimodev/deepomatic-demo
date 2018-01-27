@@ -4,8 +4,6 @@ import style from './style.scss';
 
 type Props = {
   onClick: () => void;
-  imageWidth: number;
-  imageHeight: number;
   box: {
     xmin: number;
     xmax: number;
@@ -15,19 +13,22 @@ type Props = {
 }
 
 function AreaPoint(props: Props) {
-  const { onClick, imageWidth, imageHeight, box } = props;
+  const { onClick, box } = props;
   const xCenter = (box.xmin + box.xmax) / 2;
   const yCenter = (box.ymin + box.ymax) / 2;
-  const xCenterPx = Math.floor(xCenter * imageWidth);
-  const yCenterPx = Math.floor(yCenter * imageHeight);
-  const top = yCenterPx - 10;
-  const left = xCenterPx - 10;
-  const buttonCss = {
-    top: `${top}px`,
-    left: `${left}px`,
+  const xCenterPct = Math.round(xCenter * 100);
+  const yCenterPct = Math.round(yCenter * 100);
+
+  const containerCss = {
+    top: `${yCenterPct}%`,
+    left: `${xCenterPct}%`,
   };
 
-  return <button className={style.button} style={buttonCss} onClick={onClick} />;
+  return (
+    <div className={style.pointContainer} style={containerCss}>
+      <button className={style.pointButton} onClick={onClick} />
+    </div>
+  );
 }
 
 export default AreaPoint;

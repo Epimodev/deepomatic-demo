@@ -1,6 +1,13 @@
 @import "mixins";
 
-.button {
+.pointContainer {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.pointButton {
   @include resetButton;
   position: absolute;
   width: 20px;

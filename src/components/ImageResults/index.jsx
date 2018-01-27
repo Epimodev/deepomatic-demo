@@ -14,10 +14,10 @@ const ANIMATION_CLASSNAMES = {
 };
 
 const testBox = {
-  xmin: 0,
-  xmax: 0.5,
-  ymin: 0,
-  ymax: 0.5,
+  xmin: 0.5,
+  xmax: 0.8,
+  ymin: 0.2,
+  ymax: 0.6,
 };
 
 type Props = {
@@ -58,14 +58,9 @@ class ImageResults extends React.Component<Props, State> {
         <img src={url} alt="preview" className={style.image} />
         <img src={url} alt="preview" className={blurredClass} />
         <Transition in={areaSelected} classNames={ANIMATION_CLASSNAMES} timeout={500}>
-          <AreaFocus imageUrl={url} imageWidth={width} imageHeight={height} box={testBox} />
+          <AreaFocus imageUrl={url} box={testBox} />
         </Transition>
-        <AreaPoint
-          onClick={this.onSelectAreaBind}
-          imageWidth={width}
-          imageHeight={height}
-          box={testBox}
-        />
+        <AreaPoint onClick={this.onSelectAreaBind} box={testBox} />
       </div>
     );
   }
