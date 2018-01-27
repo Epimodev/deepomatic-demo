@@ -14,10 +14,10 @@ const ANIMATION_CLASSNAMES = {
 };
 
 const testBox = {
-  xmin: 0.5,
-  xmax: 0.7,
-  ymin: 0.5,
-  ymax: 0.6,
+  xmin: 0,
+  xmax: 0.5,
+  ymin: 0,
+  ymax: 0.5,
 };
 
 type Props = {

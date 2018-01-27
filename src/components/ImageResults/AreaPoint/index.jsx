@@ -20,7 +20,7 @@ function AreaPoint(props: Props) {
   const yCenter = (box.ymin + box.ymax) / 2;
   const xCenterPx = Math.floor(xCenter * imageWidth);
   const yCenterPx = Math.floor(yCenter * imageHeight);
-  const top = yCenterPx;
+  const top = yCenterPx - 10;
   const left = xCenterPx - 10;
   const buttonCss = {
     top: `${top}px`,

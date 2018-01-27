@@ -21,7 +21,7 @@ function AreaFocus(props: Props) {
   const top = Math.floor(imageHeight * box.ymin);
   const left = Math.floor(imageWidth * box.xmin);
   const width = Math.floor(imageWidth * widthPercent);
-  const height = Math.floor(imageWidth * heightPercent);
+  const height = Math.floor(imageHeight * heightPercent);
 
   const containerCss = {
     top: `${top - 1}px`,
