@@ -12,7 +12,6 @@
   height: 100%;
 }
 
-
 .blurredImage {
   position: absolute;
   top: 0;
@@ -54,21 +53,23 @@
 }
 .pointEnterActive {
   transform: translate3d(-50%, -50%, 0) scale(1);
+  transition: 300ms;
 }
 .pointExit {
   transform: translate3d(-50%, -50%, 0) scale(1);
 }
 .pointExitActive {
   transform: translate3d(-50%, -50%, 0) scale(0);
+  transition: 300ms;
 }
 
 @keyframes areaEnter {
-  0%   { opacity: 0; transform: scale(0.5); }
-  75%  { opacity: 1; transform: scale(1.05) }
-  100% { opacity: 1; transform: scale(1) }
+  0%   { opacity: 0; transform: scale(0.5); border-radius: 50%; }
+  75%  { opacity: 1; transform: scale(1.05); border-radius: 5px; }
+  100% { opacity: 1; transform: scale(1); }
 }
 @keyframes areaLeave {
-  0%   { opacity: 1; transform: scale(1); }
-  100% { opacity: 0; transform: scale(0.5) }
+  0%   { opacity: 1; transform: scale(1); border-radius: 5px; }
+  100% { opacity: 0; transform: scale(0.5); border-radius: 50%; }
 }
 

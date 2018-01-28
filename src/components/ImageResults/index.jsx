@@ -20,11 +20,10 @@ const POINT_ANIMATION_CLASSNAMES = {
   exit: style.pointExit,
   exitActive: style.pointExitActive,
 };
-const POINT_DURATION = 300;
-const POINT_DELAY = 50;
 
 type Props = {
   url: string;
+  overedLabel: string;
   boxes: DetectedBox[];
 }
 
@@ -46,6 +45,12 @@ class ImageResults extends React.Component<Props, State> {
     this.unselectAreaBind = this.unselectArea.bind(this);
   }
 
+  componentWillReceiveProps(nextProps: Props) {
+    if (this.props.url !== nextProps.url) {
+      this.setState(() => ({ areaSelected: '' }));
+    }
+  }
+
   selectArea(boxId: string) {
     this.setState(() => ({ areaSelected: boxId }));
   }
@@ -55,7 +60,7 @@ class ImageResults extends React.Component<Props, State> {
   }
 
   render() {
-    const { url, boxes } = this.props;
+    const { url, boxes, overedLabel } = this.props;
     const { areaSelected } = this.state;
     const blurredClass = classnames(style.blurredImage, {
       [style.blurredImage_hide]: !areaSelected,
@@ -70,29 +75,21 @@ class ImageResults extends React.Component<Props, State> {
         <img src={url} alt="preview" className={blurredClass} onClick={this.unselectAreaBind} />
         <TransitionGroup>
           {transitionBoxes.map(box => (
-            <Transition key={box.id} classNames={ANIMATION_CLASSNAMES} timeout={300}>
+            <Transition key={box.id} classNames={ANIMATION_CLASSNAMES} timeout={400}>
               <AreaFocus imageUrl={url} box={box} />
             </Transition>
           ))}
         </TransitionGroup>
-        {boxes.map((box, index) => {
-          const timeout = {
-            enter: POINT_DURATION + (POINT_DELAY * (boxes.length - 1)),
-            exit: POINT_DURATION,
-          };
-          const delay = !areaSelected ? index * POINT_DELAY : 0;
-
-          return (
-            <Transition
-              key={box.id}
-              in={!areaSelected}
-              classNames={POINT_ANIMATION_CLASSNAMES}
-              timeout={timeout}
-            >
-              <AreaPoint onClick={this.selectAreaBind} box={box} delay={delay} />
-            </Transition>
-          );
-        })}
+        {boxes.map(box => (
+          <Transition
+            key={box.id}
+            in={!areaSelected}
+            classNames={POINT_ANIMATION_CLASSNAMES}
+            timeout={400}
+          >
+            <AreaPoint onClick={this.selectAreaBind} box={box} overedLabel={overedLabel} />
+          </Transition>
+        ))}
       </div>
     );
   }

@@ -1,3 +1,4 @@
+@import "colors";
 @import "mixins";
 
 .pointContainer {
@@ -5,7 +6,6 @@
   width: 20px;
   height: 20px;
   transform: translate3d(-50%, -50%, 0);
-  transition: 300ms;
 }
 
 .pointButton {
@@ -18,11 +18,21 @@
   background-color: rgba(white, 0.5);
   box-shadow: 0 0 20px rgba(black, 1);
   border-radius: 50%;
+  transition: 200ms;
 
   &:hover {
     transform: scale(1.1);
+    background-color: rgba(white, 0.9);
     animation: buttonHover 200ms;
   }
+}
+.pointButton_forward {
+  transform: scale(1.2);
+  background-color: rgba(white, 0.8);
+}
+.pointButton_backward {
+  transform: scale(0.7);
+  opacity: 0.5;
 }
 
 @keyframes buttonHover {

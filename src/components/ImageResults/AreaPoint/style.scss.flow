@@ -3,5 +3,7 @@
 declare module.exports: {|
   +'buttonHover': string;
   +'pointButton': string;
+  +'pointButton_backward': string;
+  +'pointButton_forward': string;
   +'pointContainer': string;
 |};

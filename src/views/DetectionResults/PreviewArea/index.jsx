@@ -12,6 +12,7 @@ type ComponentProps = {}
 type StateProps = {
   +imageUrl: string;
   +boxes: DetectedBox[];
+  +overedLabel: string;
 }
 
 type Props = ComponentProps & StateProps
@@ -121,7 +122,7 @@ class PreviewArea extends React.PureComponent<Props, ComponentState> {
   }
 
   render() {
-    const { imageUrl, boxes } = this.props;
+    const { imageUrl, boxes, overedLabel } = this.props;
     const { width, height } = this.computeImageSize();
     const contentCss = {
       width: `${width}px`,
@@ -138,7 +139,7 @@ class PreviewArea extends React.PureComponent<Props, ComponentState> {
             ref={this.setImageNodeBind}
             className={style.image}
           />
-          <ImageResults url={imageUrl} boxes={boxes} />
+          <ImageResults url={imageUrl} boxes={boxes} overedLabel={overedLabel} />
         </div>
       </div>
     );
@@ -153,6 +154,7 @@ function mapStateToProps(state: State): StateProps {
   return {
     imageUrl,
     boxes: state.result.boxes,
+    overedLabel: state.result.overKey,
   };
 }
 
