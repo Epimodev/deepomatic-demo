@@ -1,7 +1,7 @@
 // @flow
 import * as axios from 'axios';
 import { wait } from 'src/utils/timeUtils';
-import type { DetectionQuery, LaunchTaskResponse, TaskResponse, DetectionResponse } from './types';
+import type { DetectionQuery, LaunchTaskResponse, TaskResponse, DetectionResponse, DetectedLabel, DetectedBox, DetectedData } from './types';
 
 const ressource = axios.create({
   baseURL: environment.API_URL,
@@ -59,6 +59,32 @@ function getResults<T>(taskId: number): Promise<T> {
     });
 }
 
-export function detectObjects(query: DetectionQuery): Promise<DetectionResponse> {
-  return launchDetection(query).then(getResults);
+export function formatResponse(data: DetectionResponse): DetectedData {
+  const initial: DetectedData = {
+    detectedLabels: [],
+    boxes: [],
+  };
+
+  return Object.keys(data.boxes).reduce((acc, key) => {
+    const detectedLabel = {
+      label: key,
+      count: data.boxes[key].length,
+    };
+    const keyBoxes: DetectedBox[] = data.boxes[key].map((box, index) => {
+      return {
+        ...box,
+        id: `${key}-${index}`,
+        label: key,
+      };
+    });
+
+    return {
+      detectedLabels: [...acc.detectedLabels, detectedLabel],
+      boxes: acc.boxes.concat(keyBoxes),
+    };
+  }, initial);
+}
+
+export function detectObjects(query: DetectionQuery): Promise<DetectedData> {
+  return launchDetection(query).then(getResults).then(formatResponse);
 }

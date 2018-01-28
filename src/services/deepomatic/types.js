@@ -33,3 +33,18 @@ export type DetectionResponse = {
   width: number;
   height: number;
 }
+
+export type DetectedLabel = {
+  label: string;
+  count: number;
+}
+
+export type DetectedBox = DetectionBox & {
+  id: string;
+  label: string;
+}
+
+export type DetectedData = {
+  detectedLabels: DetectedLabel[];
+  boxes: DetectedBox[];
+}

@@ -49,6 +49,19 @@
   animation: areaLeave 300ms;
 }
 
+.pointEnter {
+  transform: translate3d(-50%, -50%, 0) scale(0);
+}
+.pointEnterActive {
+  transform: translate3d(-50%, -50%, 0) scale(1);
+}
+.pointExit {
+  transform: translate3d(-50%, -50%, 0) scale(1);
+}
+.pointExitActive {
+  transform: translate3d(-50%, -50%, 0) scale(0);
+}
+
 @keyframes areaEnter {
   0%   { opacity: 0; transform: scale(0.5); }
   75%  { opacity: 1; transform: scale(1.05) }

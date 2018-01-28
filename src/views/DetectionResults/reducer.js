@@ -4,9 +4,8 @@ import * as types from './types';
 
 const initialState: types.ResultState = {
   configIsDisplayed: false,
-  boxes: {},
-  width: 0,
-  height: 0,
+  detectedLabels: [],
+  boxes: [],
   overKey: '',
 };
 
@@ -18,9 +17,8 @@ export default function reducer(
     case 'DETECTION_SUCCESS':
       return {
         ...state,
+        detectedLabels: action.payload.detectedLabels,
         boxes: action.payload.boxes,
-        width: action.payload.width,
-        height: action.payload.height,
         configIsDisplayed: false,
       };
     case 'OVER_DETECTED_TYPE':

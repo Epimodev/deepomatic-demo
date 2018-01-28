@@ -30,4 +30,8 @@ function Transition(props: Props) {
   );
 }
 
+Transition.defaultProps = {
+  in: false,
+};
+
 export default Transition;

@@ -10,4 +10,8 @@ declare module.exports: {|
   +'blurredImage_hide': string;
   +'container': string;
   +'image': string;
+  +'pointEnter': string;
+  +'pointEnterActive': string;
+  +'pointExit': string;
+  +'pointExitActive': string;
 |};

@@ -1,17 +1,16 @@
 // @flow
-import type { DetectionBox, DetectionResponse } from 'src/services/deepomatic/types';
+import type { DetectedLabel, DetectedBox, DetectedData } from 'src/services/deepomatic/types';
 
 export type ResultState = {
   configIsDisplayed: boolean;
-  boxes: { [x: string]: DetectionBox[] };
-  width: number;
-  height: number;
+  detectedLabels: DetectedLabel[];
+  boxes: DetectedBox[];
   overKey: string;
 }
 
 export type SuccessDetectionAction = {
   type: 'DETECTION_SUCCESS';
-  payload: DetectionResponse;
+  payload: DetectedData;
 }
 
 export type OverDetectedKeyAction = {

@@ -3,6 +3,7 @@ import * as React from 'react';
 // import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import type { State /*, AppDispatch */ } from 'src/store';
+import type { DetectedBox } from 'src/services/deepomatic/types';
 import ImageResults from 'src/components/ImageResults';
 import style from './style.scss';
 
@@ -10,6 +11,7 @@ type ComponentProps = {}
 
 type StateProps = {
   +imageUrl: string;
+  +boxes: DetectedBox[];
 }
 
 type Props = ComponentProps & StateProps
@@ -119,7 +121,7 @@ class PreviewArea extends React.PureComponent<Props, ComponentState> {
   }
 
   render() {
-    const { imageUrl } = this.props;
+    const { imageUrl, boxes } = this.props;
     const { width, height } = this.computeImageSize();
     const contentCss = {
       width: `${width}px`,
@@ -136,7 +138,7 @@ class PreviewArea extends React.PureComponent<Props, ComponentState> {
             ref={this.setImageNodeBind}
             className={style.image}
           />
-          <ImageResults url={imageUrl} width={width} height={height} />
+          <ImageResults url={imageUrl} boxes={boxes} />
         </div>
       </div>
     );
@@ -150,6 +152,7 @@ function mapStateToProps(state: State): StateProps {
     : config.fileValue;
   return {
     imageUrl,
+    boxes: state.result.boxes,
   };
 }
 

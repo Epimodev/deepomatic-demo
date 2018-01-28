@@ -5,6 +5,7 @@ import Transition from 'src/components/no-design/Transition';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import type { State, AppDispatch } from 'src/store';
+import type { DetectedLabel } from 'src/services/deepomatic/types';
 import AppLoader from 'src/components/AppLoader';
 import messages from 'src/messages';
 import PreviewArea from './PreviewArea';
@@ -19,7 +20,6 @@ type ComponentProps = {
 
 type StateProps = {
   +configIsDisplayed: boolean;
-  +detectedObjects: string[];
   +isDetecting: boolean;
 }
 
@@ -38,7 +38,7 @@ const TRANSITION_CLASSNAMES = {
 
 function DetectionResults(props: Props) {
   const {
-    show, configIsDisplayed, detectedObjects, isDetecting, openConfig,
+    show, configIsDisplayed, detectedLabels, isDetecting, openConfig,
   } = props;
 
   const partsClass = classnames(style.parts, {
@@ -57,11 +57,7 @@ function DetectionResults(props: Props) {
             <PreviewArea />
           </div>
           <div className={style.resultsPart}>
-            <ResultsCard
-              hidden={configIsDisplayed}
-              detectedObjects={detectedObjects}
-              openConfig={openConfig}
-            />
+            <ResultsCard hidden={configIsDisplayed} openConfig={openConfig} />
             <ConfigCard show={configIsDisplayed} />
           </div>
         </div>

@@ -1,15 +1,11 @@
 // @flow
 import * as React from 'react';
+import type { DetectedBox } from 'src/services/deepomatic/types';
 import style from './style.scss';
 
 type Props = {
   imageUrl: string;
-  box: {
-    xmin: number;
-    xmax: number;
-    ymin: number;
-    ymax: number;
-  }
+  box: DetectedBox;
 }
 
 function AreaFocus(props: Props) {

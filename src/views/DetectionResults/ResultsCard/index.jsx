@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import type { State, AppDispatch } from 'src/store';
+import type { DetectedLabel } from 'src/services/deepomatic/types';
 import Card, { CardTitle, CardButtons } from 'src/components/Card';
 import Button from 'src/components/Button';
 import messages from 'src/messages';
@@ -12,12 +13,12 @@ import style from './style.scss';
 
 type ComponentProps = {
   +hidden: boolean;
-  +detectedObjects: string[];
   +openConfig: () => void;
 }
 
 type StateProps = {
-  overKey: string;
+  +detectedLabels: DetectedLabel[];
+  +overKey: string;
 }
 
 type DispatchProps = {
@@ -29,7 +30,7 @@ type Props = ComponentProps & StateProps & DispatchProps
 
 function ResultCard(props: Props) {
   const {
-    hidden, detectedObjects, openConfig,
+    hidden, detectedLabels, openConfig,
     overKey,
     overItem, leaveItem,
   } = props;
@@ -43,22 +44,22 @@ function ResultCard(props: Props) {
 
       <span className={style.listTitle}>{messages.DETECTED_ITEMS}</span>
       <ul className={style.list}>
-        {detectedObjects.map((object) => {
-          const onEnter = () => overItem(object);
-          const itemIsHidden = oneKeyIsOver && overKey !== object;
+        {detectedLabels.map((detectedlabel) => {
+          const onEnter = () => overItem(detectedlabel.label);
+          const itemIsHidden = oneKeyIsOver && overKey !== detectedlabel.label;
           const itemClass = classnames(style.item, {
             [style.item_hidden]: itemIsHidden,
           });
           return (
             <li
-              key={object}
+              key={detectedlabel.label}
               onMouseEnter={onEnter}
               onFocus={onEnter}
               onMouseLeave={leaveItem}
               onBlur={leaveItem}
               className={itemClass}
             >
-              <span>-</span>{object}
+              <span>-</span>{detectedlabel.label}
             </li>
           );
         })}
@@ -75,6 +76,7 @@ function ResultCard(props: Props) {
 
 function mapStateToProps(state: State): StateProps {
   return {
+    detectedLabels: state.result.detectedLabels,
     overKey: state.result.overKey,
   };
 }
