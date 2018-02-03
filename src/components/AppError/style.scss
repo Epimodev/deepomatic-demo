@@ -1,0 +1,69 @@
+@import "colors";
+
+.container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 100;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: rgba(white, 0.82);
+  opacity: 1;
+  text-align: center;
+  font-weight: normal;
+  color: $purple;
+  transition: 300ms;
+}
+.containerEnter {
+  opacity: 0;
+}
+.containerEnterActive {
+  opacity: 1;
+}
+.containerExit {
+  opacity: 1;
+}
+.containerExitActive {
+  opacity: 0;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  width: 100%;
+  max-width: 500px;
+  min-height: 220px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.title {
+  font-size: 18px;
+  margin: 15px 0;
+}
+.sentence {
+  font-size: 16px;
+}
+.buttons {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin: 50px 0 20px 0;
+}
+.illustrationContainer {
+  display: flex;
+  justify-content: center;
+}
+.illustration {
+  width: 1024px;
+  min-width: 1024px;
+  height: 133px;
+}

@@ -10,6 +10,7 @@ const initialState: types.ConfigurationState = {
   fileValue: '',
   fileError: '',
   isDetecting: false,
+  detectionFailed: false,
   onboardingFinished: false,
   detectedConfig: {
     detectionType: '',
@@ -65,11 +66,18 @@ export default function reducer(
       return {
         ...state,
         isDetecting: true,
+        detectionFailed: false,
       };
     case 'DETECTION_ERROR':
       return {
         ...state,
         isDetecting: false,
+        detectionFailed: true,
+      };
+    case 'CLOSE_ERROR':
+      return {
+        ...state,
+        detectionFailed: false,
       };
     case 'DETECTION_SUCCESS':
       return {

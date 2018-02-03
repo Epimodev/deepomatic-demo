@@ -92,6 +92,7 @@ export function submitConfiguration(): ActionThunk {
     waitAtLeast(1000)()
       .then(() => dispatch({
         type: 'DETECTION_SUCCESS',
+        // type: 'DETECTION_ERROR',
         payload: formattedExample,
       }));
     // detectObjects(query)
@@ -100,4 +101,8 @@ export function submitConfiguration(): ActionThunk {
     //     console.log(detectionData);
     //   });
   };
+}
+
+export function closeError(): types.CloseErrorAction {
+  return { type: 'CLOSE_ERROR' };
 }

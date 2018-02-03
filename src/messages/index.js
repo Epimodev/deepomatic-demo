@@ -22,11 +22,15 @@ export default {
   DETECTION_RESULTS: 'Résultat de la détection',
   DETECTED_ITEMS: 'Éléments détectés :',
   CHANGE_CONFIGURATION: 'Modifier la configuration',
+  ERROR_TITLE: 'Oups! Une erreur est survenue',
+  ERROR_SENTENCE: 'Vous pouvez reessayer ou bien revenir en arrière et modifier votre configuration',
 
   START: 'Commencer',
   PREVIOUS: 'Précédent',
   NEXT: 'Suivant',
   CANCEL: 'Annuler',
+  BACK: 'Retour',
+  RETRY: 'Reessayer',
   LAUNCH_DETECTION: 'Lancer l’analyse',
   RELAUNCH_DETECTION: 'Relancer l’analyse',
 };

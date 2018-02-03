@@ -6,25 +6,30 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import type { State, AppDispatch } from 'src/store';
 import AppLoader from 'src/components/AppLoader';
+import AppError from 'src/components/AppError';
 import ScreenButton from 'src/components/ScreenButton';
 import messages from 'src/messages';
 import PreviewArea from './PreviewArea';
 import ResultsCard from './ResultsCard';
 import ConfigCard from './ConfigCard';
 import * as actions from './actions';
+import * as formActions from '../FormCards/actions';
 import style from './style.scss';
 
 type ComponentProps = {
-  show: boolean;
+  +show: boolean;
 }
 
 type StateProps = {
   +configIsDisplayed: boolean;
   +isDetecting: boolean;
+  +detectionFailed: boolean;
 }
 
 type DispatchProps = {
   +openConfig: () => void;
+  +retry: () => void;
+  +closeError: () => void;
 }
 
 type Props = ComponentProps & StateProps & DispatchProps
@@ -86,12 +91,13 @@ class DetectionResults extends React.PureComponent<Props, ComponentState> {
 
   render() {
     const {
-      show, configIsDisplayed, isDetecting, openConfig,
+      show, configIsDisplayed, isDetecting, detectionFailed,
+      openConfig, retry, closeError,
     } = this.props;
     const { isSmallScreen, showDetails } = this.state;
 
     const partsClass = classnames(style.parts, {
-      [style.parts_overlayed]: isDetecting,
+      [style.parts_overlayed]: isDetecting || detectionFailed,
     });
     const resultsPartClass = classnames(style.resultsPart, {
       [style.resultsPart_hidden]: isSmallScreen && !showDetails,
@@ -122,6 +128,7 @@ class DetectionResults extends React.PureComponent<Props, ComponentState> {
             </div>
           </div>
           <AppLoader show={isDetecting} message={messages.ANALYSING_IMAGE} />
+          <AppError show={detectionFailed} onCancel={closeError} onRetry={retry} />
         </div>
       </Transition>
     );
@@ -132,12 +139,15 @@ function mapStateToProps(state: State): StateProps {
   return {
     configIsDisplayed: state.result.configIsDisplayed,
     isDetecting: state.configuration.isDetecting,
+    detectionFailed: state.configuration.detectionFailed,
   };
 }
 
 function mapDispatchToProps(dispatch: AppDispatch) {
   return bindActionCreators({
     openConfig: actions.showResultConfig,
+    retry: formActions.submitConfiguration,
+    closeError: formActions.closeError,
   }, dispatch);
 }
 

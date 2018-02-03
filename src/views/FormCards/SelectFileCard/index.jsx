@@ -9,6 +9,7 @@ import Card, { CardContent, CardOverlay, CardTitle, CardButtons } from 'src/comp
 import Button from 'src/components/Button';
 import ImageSelector from 'src/components/ImageSelector';
 import AppLoader from 'src/components/AppLoader';
+import AppError from 'src/components/AppError';
 import messages from 'src/messages';
 import * as actions from '../actions';
 
@@ -23,6 +24,7 @@ type StateProps = {
   +fileValue: string;
   +fileError: string;
   +isDetecting: boolean;
+  +detectionFailed: boolean;
 }
 
 type DispatchProps = {
@@ -31,6 +33,7 @@ type DispatchProps = {
   +changeFile: (file: File) => void;
   +previousStep: () => void;
   +submit: () => void;
+  +closeError: () => void;
 }
 
 type Props = ComponentProps & StateProps & DispatchProps
@@ -43,11 +46,13 @@ function SelectFileCard(props: Props) {
     changeUploadType,
     imageUrl,
     isDetecting,
+    detectionFailed,
     changeImageUrl,
     changeFile,
     fileValue,
     fileError,
     previousStep,
+    closeError,
     submit,
   } = props;
 
@@ -77,8 +82,9 @@ function SelectFileCard(props: Props) {
           <Button onClick={onNextClick} isPrimary>{messages.LAUNCH_DETECTION}</Button>
         </CardButtons>
       </CardContent>
-      <CardOverlay active={isDetecting}>
+      <CardOverlay active={isDetecting || detectionFailed}>
         <AppLoader show={isDetecting} message={messages.ANALYSING_IMAGE} />
+        <AppError show={detectionFailed} onCancel={closeError} onRetry={submit} />
       </CardOverlay>
     </Card>
   );
@@ -91,6 +97,7 @@ function mapStateToProps(state: State): StateProps {
     fileValue: state.configuration.fileValue,
     fileError: state.configuration.fileError,
     isDetecting: state.configuration.isDetecting,
+    detectionFailed: state.configuration.detectionFailed,
   };
 }
 
@@ -100,6 +107,7 @@ function mapDispatchToProps(dispatch: AppDispatch) {
     changeImageUrl: actions.changeImageUrl,
     changeFile: actions.changeFile,
     previousStep: actions.previousStep,
+    closeError: actions.closeError,
     submit: actions.submitConfiguration,
   }, dispatch);
 }
