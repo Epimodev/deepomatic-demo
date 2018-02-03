@@ -15,7 +15,7 @@ declare module "fast-memoize" {
     strategy: Strategy<T>,
   }
 
-  declare function exports<T>(
+  declare export default function memoize<T>(
     fn: T,
     options?: MemoizeOptions<T>
   ): T;
