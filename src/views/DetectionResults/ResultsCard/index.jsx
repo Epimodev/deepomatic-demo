@@ -60,7 +60,7 @@ function ResultCard(props: Props) {
                 onBlur={leaveItem}
                 className={itemClass}
               >
-                <span>-</span>{detectedlabel.label}
+                <span>-</span>{detectedlabel.label} (x{detectedlabel.count})
               </li>
             );
           })}
