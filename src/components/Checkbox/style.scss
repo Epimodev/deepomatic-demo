@@ -36,6 +36,9 @@ $labelTranslate: 13px;
   &.gray {
     background-color: $gray;
   }
+  &.green {
+    background-color: $green;
+  }
 
   .checkmark {
     opacity: 1;
@@ -55,6 +58,9 @@ $labelTranslate: 13px;
 }
 .gray {
   color: $gray;
+}
+.green {
+  color: $green;
 }
 
 .checkmark {

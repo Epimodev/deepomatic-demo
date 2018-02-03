@@ -5,6 +5,7 @@ declare module.exports: {|
   +'container': string;
   +'container_checked': string;
   +'gray': string;
+  +'green': string;
   +'label': string;
   +'orange': string;
   +'pink': string;

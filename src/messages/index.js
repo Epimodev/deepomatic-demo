@@ -8,6 +8,7 @@ export default {
   FASHION: 'Mode',
   FURNITURE: 'Mobilier',
   WEAPONS: 'Armes',
+  STREETS: 'Ville',
   IMAGE_TO_DETECT: 'Image à analyser',
   ON_WEB: 'Venant du net',
   ON_COMPUTER: 'De mon ordi',

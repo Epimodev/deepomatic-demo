@@ -8,7 +8,7 @@ import style from './style.scss';
 type Props = {
   name: string;
   checked: boolean;
-  color: 'pink' | 'orange' | 'gray';
+  color: 'pink' | 'orange' | 'gray' | 'green';
   children: string;
   onChange: (name: string, value: boolean) => void;
 }
