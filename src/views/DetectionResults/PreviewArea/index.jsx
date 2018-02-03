@@ -123,11 +123,12 @@ class PreviewArea extends React.PureComponent<Props, ComponentState> {
 
   render() {
     const { imageUrl, boxes, overedLabel } = this.props;
-    const { width, height } = this.computeImageSize();
+    const imageSize = this.computeImageSize();
     const contentCss = {
-      width: `${width}px`,
-      height: `${height}px`,
+      width: `${imageSize.width}px`,
+      height: `${imageSize.height}px`,
     };
+
 
     return (
       <div className={style.container} ref={this.setContainerNodeBind}>
@@ -139,7 +140,7 @@ class PreviewArea extends React.PureComponent<Props, ComponentState> {
             ref={this.setImageNodeBind}
             className={style.image}
           />
-          <ImageResults url={imageUrl} boxes={boxes} overedLabel={overedLabel} />
+          <ImageResults size={imageSize} url={imageUrl} boxes={boxes} overedLabel={overedLabel} />
         </div>
       </div>
     );

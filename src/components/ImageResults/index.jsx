@@ -29,6 +29,10 @@ const POINT_ANIMATION_CLASSNAMES = {
 };
 
 type Props = {
+  size: {
+    width: number;
+    height: number;
+  };
   url: string;
   overedLabel: string;
   boxes: DetectedBox[];
@@ -67,7 +71,7 @@ class ImageResults extends React.Component<Props, State> {
   }
 
   render() {
-    const { url, boxes, overedLabel } = this.props;
+    const { size, url, boxes, overedLabel } = this.props;
     const { areaSelected } = this.state;
     const blurredClass = classnames(style.blurredImage, {
       [style.blurredImage_hide]: !areaSelected,
@@ -88,7 +92,7 @@ class ImageResults extends React.Component<Props, State> {
           ))}
           {transitionBoxes.map(box => (
             <Transition key={box.id} classNames={LABEL_ANIMATION_CLASSNAMES} timeout={500}>
-              <AreaLabel box={box} onClose={this.unselectAreaBind} />
+              <AreaLabel size={size} box={box} onClose={this.unselectAreaBind} />
             </Transition>
           ))}
         </TransitionGroup>
