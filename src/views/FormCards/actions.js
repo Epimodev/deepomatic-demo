@@ -1,12 +1,9 @@
 // @flow
 import type { ActionThunk } from 'src/store';
 import { waitAtLeast } from 'src/utils/timeUtils';
-import { detectObjects, formatResponse } from 'src/services/deepomatic';
+import { detectObjects } from 'src/services/deepomatic';
 import messages from 'src/messages';
-import exampleData from 'example/data.json';
 import * as types from './types';
-
-const formattedExample = formatResponse(exampleData);
 
 export function changeType(name: string, becomeChecked: boolean): types.ChangeTypeAction {
   const detectionType = becomeChecked
@@ -89,17 +86,18 @@ export function submitConfiguration(): ActionThunk {
     };
 
     dispatch({ type: 'LAUNCH_DETECTION' });
-    waitAtLeast(1000)()
-      .then(() => dispatch({
-        type: 'DETECTION_SUCCESS',
-        // type: 'DETECTION_ERROR',
-        payload: formattedExample,
-      }));
-    // detectObjects(query)
-    //   .then(waitAtLeast(1000))
-    //   .then((detectionData) => {
-    //     console.log(detectionData);
-    //   });
+    detectObjects(query)
+      .then(waitAtLeast(1000))
+      .then((detectionData) => {
+        dispatch({
+          type: 'DETECTION_SUCCESS',
+          payload: detectionData,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        dispatch({ type: 'DETECTION_ERROR' });
+      });
   };
 }
 
