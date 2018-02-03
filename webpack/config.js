@@ -12,7 +12,7 @@ module.exports = {
   cssOptions: {
     modules: true,
     importLoaders: 1,
-    localIdentName: '[path][local]',
+    localIdentName: '[hash:5][local]',
     url: false,
     minimize: true,
   },
