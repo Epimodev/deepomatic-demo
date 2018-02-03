@@ -2,19 +2,23 @@
 import * as React from 'react';
 import Transition from 'src/components/no-design/Transition';
 import classnames from 'classnames';
-import { computeStyles } from './utils';
+import { childIsComponent } from 'src/utils/reactUtils';
+import { computeStyles, nextChildIsOverlay } from './utils';
 import style from './style.scss';
+import CardContent from './CardContent';
+import CardOverlay from './CardOverlay';
 import CardTitle from './CardTitle';
 import CardText from './CardText';
 import CardButtons from './CardButtons';
-import AppLoader from '../AppLoader';
+// import AppLoader from '../AppLoader';
+
+type ChildTypes = typeof CardContent | typeof CardOverlay;
+type ComponentChildren = React.Element<ChildTypes>;
 
 type Props = {
   depth: number;
   show: boolean;
-  children: React.Element<any> | React.ChildrenArray<React.Element<any>>;
-  loading: boolean;
-  loadingMessage: string;
+  children: ComponentChildren | React.ChildrenArray<ComponentChildren>;
   className: string;
 }
 
@@ -27,14 +31,11 @@ const TRANSITION_CLASSNAMES = {
 
 function Card(props: Props) {
   const {
-    depth, show, children, loading, loadingMessage, className,
+    depth, show, children, className,
   } = props;
 
   const containerClass = classnames(style.container, className);
   const { cardStyle, contentStyle } = computeStyles(depth);
-  const contentClass = classnames(style.content, {
-    [style.content_blurred]: depth > 0 || loading,
-  });
 
   return (
     <Transition
@@ -44,10 +45,16 @@ function Card(props: Props) {
     >
       <div className={containerClass}>
         <div style={cardStyle} className={style.card}>
-          <div style={contentStyle} className={contentClass}>
-            {children}
-          </div>
-          <AppLoader show={loading} message={loadingMessage} />
+          {React.Children.map(children, (child: ComponentChildren, index) => {
+            if (childIsComponent(child, CardContent)) {
+              const isOverlayed = depth > 0 || nextChildIsOverlay(children, index);
+              return React.cloneElement(child, { css: contentStyle, isOverlayed });
+            }
+            if (childIsComponent(child, CardOverlay)) {
+              return child;
+            }
+            return null;
+          })}
         </div>
       </div>
     </Transition>
@@ -63,4 +70,4 @@ Card.defaultProps = {
 };
 
 export default Card;
-export { CardTitle, CardText, CardButtons };
+export { CardContent, CardOverlay, CardTitle, CardText, CardButtons };

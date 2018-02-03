@@ -7,6 +7,4 @@ declare module.exports: {|
   +'containerEnterActive': string;
   +'containerExit': string;
   +'containerExitActive': string;
-  +'content': string;
-  +'content_blurred': string;
 |};

@@ -1,5 +1,8 @@
 // @flow
+import * as React from 'react';
 import memoize from 'fast-memoize';
+import { childIsComponent } from 'src/utils/reactUtils';
+import CardOverlay from './CardOverlay';
 
 type CardStyles = {
   cardStyle: {
@@ -30,3 +33,11 @@ function computeStyles0(depth: number): CardStyles {
 }
 
 export const computeStyles = memoize(computeStyles0);
+
+export function nextChildIsOverlay(children: any, index: number) {
+  const nextChild: React.Element<*> = children[index + 1];
+  if (nextChild && childIsComponent(nextChild, CardOverlay)) {
+    return nextChild.props.active;
+  }
+  return false;
+}

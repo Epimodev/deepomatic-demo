@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import type { State, AppDispatch } from 'src/store';
 import type { UploadType } from 'src/services/deepomatic/types';
 import { imageIsFilled, getUrlError } from 'src/utils/formUtils';
-import Card, { CardTitle, CardButtons } from 'src/components/Card';
+import Card, { CardContent, CardTitle, CardButtons } from 'src/components/Card';
 import Button from 'src/components/Button';
 import Checkbox from 'src/components/Checkbox';
 import detectionTypes from 'src/constants/detectionTypes';
@@ -53,41 +53,43 @@ function ConfigCard(props: Props) {
 
   return (
     <Card show={show} className={style.configCard}>
-      <CardTitle>{messages.TYPE_TO_DETECT}</CardTitle>
-      <div className={style.types}>
-        {detectionTypes.map(({ name, label, color }) => (
-          <Checkbox
-            key={name}
-            name={name}
-            checked={selectedType === name}
-            color={color}
-            onChange={changeType}
-          >
-            {label}
-          </Checkbox>
-        ))}
-      </div>
+      <CardContent>
+        <CardTitle>{messages.TYPE_TO_DETECT}</CardTitle>
+        <div className={style.types}>
+          {detectionTypes.map(({ name, label, color }) => (
+            <Checkbox
+              key={name}
+              name={name}
+              checked={selectedType === name}
+              color={color}
+              onChange={changeType}
+            >
+              {label}
+            </Checkbox>
+          ))}
+        </div>
 
-      <CardTitle>{messages.IMAGE_TO_DETECT}</CardTitle>
-      <ImageSelector
-        uploadType={uploadType}
-        imageUrl={imageUrl}
-        urlError={urlError}
-        fileValue={fileValue}
-        fileError={fileError}
-        changeUploadType={changeUploadType}
-        changeImageUrl={changeImageUrl}
-        changeFile={changeFile}
-      />
+        <CardTitle>{messages.IMAGE_TO_DETECT}</CardTitle>
+        <ImageSelector
+          uploadType={uploadType}
+          imageUrl={imageUrl}
+          urlError={urlError}
+          fileValue={fileValue}
+          fileError={fileError}
+          changeUploadType={changeUploadType}
+          changeImageUrl={changeImageUrl}
+          changeFile={changeFile}
+        />
 
-      <CardButtons>
-        <Button onClick={hideConfig}>
-          {messages.CANCEL}
-        </Button>
-        <Button onClick={onSubmit} isPrimary>
-          {messages.RELAUNCH_DETECTION}
-        </Button>
-      </CardButtons>
+        <CardButtons>
+          <Button onClick={hideConfig}>
+            {messages.CANCEL}
+          </Button>
+          <Button onClick={onSubmit} isPrimary>
+            {messages.RELAUNCH_DETECTION}
+          </Button>
+        </CardButtons>
+      </CardContent>
     </Card>
   );
 }

@@ -5,9 +5,10 @@ import { connect } from 'react-redux';
 import type { State, AppDispatch } from 'src/store';
 import type { UploadType } from 'src/services/deepomatic/types';
 import { imageIsFilled, getUrlError } from 'src/utils/formUtils';
-import Card, { CardTitle, CardButtons } from 'src/components/Card';
+import Card, { CardContent, CardOverlay, CardTitle, CardButtons } from 'src/components/Card';
 import Button from 'src/components/Button';
 import ImageSelector from 'src/components/ImageSelector';
+import AppLoader from 'src/components/AppLoader';
 import messages from 'src/messages';
 import * as actions from '../actions';
 
@@ -57,23 +58,28 @@ function SelectFileCard(props: Props) {
 
   return (
     <Card depth={depth} show={show} loading={isDetecting} loadingMessage={messages.ANALYSING_IMAGE}>
-      <CardTitle>{messages.IMAGE_TO_DETECT}</CardTitle>
+      <CardContent>
+        <CardTitle>{messages.IMAGE_TO_DETECT}</CardTitle>
 
-      <ImageSelector
-        uploadType={uploadType}
-        imageUrl={imageUrl}
-        urlError={urlError}
-        fileValue={fileValue}
-        fileError={fileError}
-        changeUploadType={changeUploadType}
-        changeImageUrl={changeImageUrl}
-        changeFile={changeFile}
-      />
+        <ImageSelector
+          uploadType={uploadType}
+          imageUrl={imageUrl}
+          urlError={urlError}
+          fileValue={fileValue}
+          fileError={fileError}
+          changeUploadType={changeUploadType}
+          changeImageUrl={changeImageUrl}
+          changeFile={changeFile}
+        />
 
-      <CardButtons>
-        <Button onClick={previousStep}>{messages.PREVIOUS}</Button>
-        <Button onClick={onNextClick} isPrimary>{messages.LAUNCH_DETECTION}</Button>
-      </CardButtons>
+        <CardButtons>
+          <Button onClick={previousStep}>{messages.PREVIOUS}</Button>
+          <Button onClick={onNextClick} isPrimary>{messages.LAUNCH_DETECTION}</Button>
+        </CardButtons>
+      </CardContent>
+      <CardOverlay active={isDetecting}>
+        <AppLoader show={isDetecting} message={messages.ANALYSING_IMAGE} />
+      </CardOverlay>
     </Card>
   );
 }

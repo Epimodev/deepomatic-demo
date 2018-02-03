@@ -50,7 +50,7 @@ class DetectionResults extends React.PureComponent<Props, ComponentState> {
     showDetails: false,
   }
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     this.checkScreenSizeBind = this.checkScreenSize.bind(this);

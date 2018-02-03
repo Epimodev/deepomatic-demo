@@ -2,7 +2,7 @@
 import * as React from 'react';
 // import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import type { State /*, AppDispatch */ } from 'src/store';
+import type { State } from 'src/store';
 import type { DetectedBox } from 'src/services/deepomatic/types';
 import ImageResults from 'src/components/ImageResults';
 import style from './style.scss';

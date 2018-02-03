@@ -3,7 +3,7 @@ import * as React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import type { State, AppDispatch } from 'src/store';
-import Card, { CardTitle, CardText, CardButtons } from 'src/components/Card';
+import Card, { CardContent, CardTitle, CardText, CardButtons } from 'src/components/Card';
 import Button from 'src/components/Button';
 import Checkbox from 'src/components/Checkbox';
 import detectionTypes from 'src/constants/detectionTypes';
@@ -37,27 +37,29 @@ function SelectTypeCard(props: Props) {
 
   return (
     <Card depth={depth} show={show}>
-      <CardTitle>{messages.TYPE_TO_DETECT}</CardTitle>
-      <CardText>{messages.WHAT_TYPE_DETECT}</CardText>
+      <CardContent>
+        <CardTitle>{messages.TYPE_TO_DETECT}</CardTitle>
+        <CardText>{messages.WHAT_TYPE_DETECT}</CardText>
 
-      <div className={style.types}>
-        {detectionTypes.map(({ name, label, color }) => (
-          <Checkbox
-            key={name}
-            name={name}
-            checked={selectedType === name}
-            color={color}
-            onChange={changeType}
-          >
-            {label}
-          </Checkbox>
-        ))}
-      </div>
+        <div className={style.types}>
+          {detectionTypes.map(({ name, label, color }) => (
+            <Checkbox
+              key={name}
+              name={name}
+              checked={selectedType === name}
+              color={color}
+              onChange={changeType}
+            >
+              {label}
+            </Checkbox>
+          ))}
+        </div>
 
-      <CardButtons>
-        <Button onClick={previousStep}>{messages.PREVIOUS}</Button>
-        <Button onClick={onNextClick} isPrimary>{messages.NEXT}</Button>
-      </CardButtons>
+        <CardButtons>
+          <Button onClick={previousStep}>{messages.PREVIOUS}</Button>
+          <Button onClick={onNextClick} isPrimary>{messages.NEXT}</Button>
+        </CardButtons>
+      </CardContent>
     </Card>
   );
 }
