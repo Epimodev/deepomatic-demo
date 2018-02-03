@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="38px" height="37px" viewBox="0 0 38 37" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>close</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Results" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-433.000000, -331.000000)">
+        <g id="image" transform="translate(30.000000, 184.000000)" fill="currentColor">
+            <g id="content_selected-zone" transform="translate(10.000000, 10.000000)">
+                <g id="label" transform="translate(313.000000, 140.000000)">
+                    <g id="close" transform="translate(85.000000, 1.000000)">
+                        <g transform="translate(8.000000, 9.000000)" id="Rectangle-9">
+                            <rect transform="translate(6.000000, 5.500000) rotate(-45.000000) translate(-6.000000, -5.500000) " x="-1" y="5" width="14" height="1"></rect>
+                            <rect transform="translate(6.000000, 5.500000) rotate(45.000000) translate(-6.000000, -5.500000) " x="-1" y="5" width="14" height="1"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -6,13 +6,20 @@ import { TransitionGroup } from 'react-transition-group';
 import Transition from '../no-design/Transition';
 import AreaPoint from './AreaPoint';
 import AreaFocus from './AreaFocus';
+import AreaLabel from './AreaLabel';
 import style from './style.scss';
 
-const ANIMATION_CLASSNAMES = {
+const AREA_ANIMATION_CLASSNAMES = {
   enter: style.areaEnter,
   enterActive: style.areaEnterActive,
   exit: style.areaExit,
   exitActive: style.areaExitActive,
+};
+const LABEL_ANIMATION_CLASSNAMES = {
+  enter: style.labelEnter,
+  enterActive: style.labelEnterActive,
+  exit: style.labelExit,
+  exitActive: style.labelExitActive,
 };
 const POINT_ANIMATION_CLASSNAMES = {
   enter: style.pointEnter,
@@ -75,8 +82,13 @@ class ImageResults extends React.Component<Props, State> {
         <img src={url} alt="preview" className={blurredClass} onClick={this.unselectAreaBind} />
         <TransitionGroup>
           {transitionBoxes.map(box => (
-            <Transition key={box.id} classNames={ANIMATION_CLASSNAMES} timeout={400}>
+            <Transition key={box.id} classNames={AREA_ANIMATION_CLASSNAMES} timeout={400}>
               <AreaFocus imageUrl={url} box={box} />
+            </Transition>
+          ))}
+          {transitionBoxes.map(box => (
+            <Transition key={box.id} classNames={LABEL_ANIMATION_CLASSNAMES} timeout={500}>
+              <AreaLabel box={box} onClose={this.unselectAreaBind} />
             </Transition>
           ))}
         </TransitionGroup>

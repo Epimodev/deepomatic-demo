@@ -1,0 +1,43 @@
+@import "colors";
+@import "mixins";
+
+.container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: white;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 15px;
+  border: 1px solid rgba(white, 0.3);
+  box-shadow: 0 0 50px rgba(black, 0.8);
+  background-color: rgba(black, 0.4);
+}
+
+.label {
+  padding: 0 45px 0 15px;
+  font-size: 16px;
+}
+
+.button {
+  @include resetButton;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: $red;
+  opacity: 0.85;
+}
+.buttonIcon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  margin: auto;
+  color: white;
+}
