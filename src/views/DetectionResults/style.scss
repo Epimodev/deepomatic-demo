@@ -41,10 +41,10 @@
   flex-grow: 1;
   @include tablet {
     position: absolute;
-    top: 0;
+    top: 35px;
+    right: 0;
+    bottom: 35px;
     left: 0;
-    width: 100%;
-    height: 100%;
   }
 }
 
@@ -53,6 +53,24 @@
   width: 420px;
   height: 100%;
   @include tablet {
+    transition: 400ms;
     width: 100%;
+    background-color: rgba(white, 0.75);
+  }
+}
+.resultsPart_hidden {
+  transform: translateY(100%);
+  background-color: rgba(white, 0);
+}
+
+.resultCardsContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  @include tablet {
+    top: 35px;
+    bottom: 35px;
   }
 }

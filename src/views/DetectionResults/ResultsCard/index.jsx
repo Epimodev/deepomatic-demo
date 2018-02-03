@@ -12,7 +12,7 @@ import * as actions from '../actions';
 import style from './style.scss';
 
 type ComponentProps = {
-  +hidden: boolean;
+  +backward: boolean;
   +openConfig: () => void;
 }
 
@@ -30,12 +30,12 @@ type Props = ComponentProps & StateProps & DispatchProps
 
 function ResultCard(props: Props) {
   const {
-    hidden, detectedLabels, openConfig,
+    backward, detectedLabels, openConfig,
     overKey,
     overItem, leaveItem,
   } = props;
 
-  const cardDepth = hidden ? 1 : 0;
+  const cardDepth = backward ? 1 : 0;
   const oneKeyIsOver = !!overKey;
 
   return (

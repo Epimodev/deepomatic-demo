@@ -7,5 +7,7 @@ declare module.exports: {|
   +'parts': string;
   +'parts_overlayed': string;
   +'previewPart': string;
+  +'resultCardsContainer': string;
   +'resultsPart': string;
+  +'resultsPart_hidden': string;
 |};
