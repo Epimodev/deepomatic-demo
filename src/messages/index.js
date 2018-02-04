@@ -11,7 +11,7 @@ export default {
   STREETS: 'Streets',
   IMAGE_TO_DETECT: 'Image to detect',
   ON_WEB: 'From the web',
-  ON_COMPUTER: 'From my computer',
+  ON_COMPUTER: 'From my PC',
   IMAGE_URL: 'Image URL',
   EMPTY_URL: 'Image URL is required',
   INVALID_URL: 'URL is invalid',
@@ -22,7 +22,7 @@ export default {
   ANALYSING_IMAGE: 'Analysing image',
   DETECTION_RESULTS: 'Detection results',
   DETECTED_ITEMS: 'Detected elements :',
-  CHANGE_CONFIGURATION: 'Change the configuration',
+  CHANGE_CONFIGURATION: 'Change configuration',
   ERROR_TITLE: 'Ouch! An error has occurred',
   ERROR_SENTENCE: 'You can try again or go back and change your configuration',
 

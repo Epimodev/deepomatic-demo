@@ -12,6 +12,10 @@ $borderWeight: 2px;
   height: $height;
   min-width: 130px;
 
+  @include phone {
+    max-width: 140px;
+  }
+
   &::after {
     content: "";
     position: absolute;
@@ -59,6 +63,7 @@ $borderWeight: 2px;
   background-color: white;
   color: $purple;
   font-weight: normal;
+  overflow: hidden;
   @include phone {
     padding: 0 10px;
   }

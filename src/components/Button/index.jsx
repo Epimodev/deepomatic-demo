@@ -7,12 +7,15 @@ type Props = {
   children: string;
   onClick: null | () => void;
   isPrimary: boolean;
+  className: string;
 }
 
 function Button(props: Props) {
-  const { children, isPrimary, onClick } = props;
+  const {
+    children, isPrimary, onClick, className,
+  } = props;
 
-  const containerClass = classnames(style.container, {
+  const containerClass = classnames(style.container, className, {
     [style.container_disabled]: !onClick,
   });
   const buttonClass = classnames(style.button, {
@@ -30,6 +33,7 @@ function Button(props: Props) {
 
 Button.defaultProps = {
   isPrimary: false,
+  className: '',
 };
 
 export default Button;

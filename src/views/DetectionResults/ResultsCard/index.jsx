@@ -67,7 +67,7 @@ function ResultCard(props: Props) {
         </ul>
 
         <CardButtons>
-          <Button onClick={openConfig} isPrimary>
+          <Button onClick={openConfig} isPrimary className={style.configButton}>
             {messages.CHANGE_CONFIGURATION}
           </Button>
         </CardButtons>

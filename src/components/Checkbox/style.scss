@@ -1,5 +1,6 @@
 @import "colors";
 @import "mixins";
+@import "responsive";
 
 $transitionDuration: 300ms;
 $labelTranslate: 13px;
@@ -24,6 +25,10 @@ $labelTranslate: 13px;
     left: 0;
     border: 2px solid;
     border-radius: 10px;
+  }
+
+  @include phone {
+    margin-top: 15px;
   }
 }
 .container_checked {
