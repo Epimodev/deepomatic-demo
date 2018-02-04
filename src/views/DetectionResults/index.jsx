@@ -16,6 +16,8 @@ import * as actions from './actions';
 import * as formActions from '../FormCards/actions';
 import style from './style.scss';
 
+const IPAD_BREAKPOINT = 768;
+
 type ComponentProps = {
   +show: boolean;
 }
@@ -76,8 +78,8 @@ class DetectionResults extends React.PureComponent<Props, ComponentState> {
   }
 
   checkScreenSize() {
-    const windowWidth = window.outerWidth;
-    const isSmallScreen = windowWidth <= 768;
+    const windowWidth = document.body ? document.body.offsetWidth : 0;
+    const isSmallScreen = windowWidth <= IPAD_BREAKPOINT;
     this.setState({ isSmallScreen, showDetails: !isSmallScreen });
   }
 
